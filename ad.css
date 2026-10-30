@@ -4,11 +4,11 @@
 .ad-slot[hidden] { display: none; }
 .ad-card {
   position: relative;
-  min-height: 76px;
+  min-height: 140px;
   display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 11px 14px;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 19px 20px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -16,34 +16,36 @@
   color: var(--text);
 }
 .ad-image {
-  width: 54px;
-  height: 54px;
-  flex: 0 0 54px;
-  border-radius: 9px;
-  object-fit: cover;
+  width: 85px;
+  height: 85px;
+  flex: 0 0 85px;
+  border-radius: 15px;
+  object-fit: contain;
   background: var(--surface-soft);
 }
 .ad-content {
   min-width: 0;
   flex: 1;
+  padding-right: 44px;
 }
 .ad-title {
-  margin: 0 0 3px;
-  font-size: 14px;
+  margin: 0 0 7px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
 .ad-description {
-  margin: 0;
+  margin: 0 0 13px;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 14px;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 .ad-badge {
-  align-self: flex-start;
-  flex: 0 0 auto;
+  position: absolute;
+  top: 13px;
+  right: 14px;
   padding: 3px 7px;
   border: 1px solid var(--line);
   border-radius: 5px;
@@ -59,6 +61,23 @@
   z-index: 1;
   border-radius: inherit;
 }
+.ad-cta {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 126px;
+  min-height: 42px;
+  margin-top: 1px;
+  padding: 0 20px;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  pointer-events: none;
+}
 .ad-card:has(.ad-link):hover {
   border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
 }
@@ -67,22 +86,20 @@
   outline-offset: 2px;
 }
 @media (max-width: 560px) {
-  .ad-card { min-height: 68px; gap: 10px; padding: 9px 11px; }
-  .ad-image { width: 46px; height: 46px; flex-basis: 46px; }
-  .ad-title { font-size: 13px; }
-  .ad-description { font-size: 11px; }
-}
-
-.ad-cta {
-  display: inline-flex;
-  align-items: center;
-  margin-top: 7px;
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 700;
-}
-.ad-cta:after {
-  content: "↗";
-  margin-left: 5px;
-  font-size: 12px;
+  .ad-card {
+    min-height: 0;
+    gap: 13px;
+    padding: 14px;
+  }
+  .ad-image {
+    width: 64px;
+    height: 64px;
+    flex-basis: 64px;
+    border-radius: 13px;
+  }
+  .ad-content { padding-right: 28px; }
+  .ad-title { font-size: 16px; margin-bottom: 6px; }
+  .ad-description { font-size: 13px; margin-bottom: 11px; }
+  .ad-cta { min-height: 38px; min-width: 116px; font-size: 13px; }
+  .ad-badge { top: 9px; right: 10px; }
 }
