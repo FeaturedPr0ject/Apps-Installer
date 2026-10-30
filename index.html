@@ -5,21 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <title>Games Installer</title>
-<style>
-:root{color-scheme:light;--accent:#f44336;--text:#202124;--muted:#70757a;--line:#e8e8e8;--surface:#fff;--bg:#f7f7f7}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-.top{max-width:1050px;margin:auto;padding:18px 20px;display:flex;align-items:center;gap:14px}
-.brand{font-size:21px;font-weight:750;letter-spacing:-.5px;white-space:nowrap}.brand span{color:var(--accent)}
-.search{margin-left:auto;max-width:390px;width:100%;position:relative}.search input{width:100%;height:42px;border:1px solid #dedede;border-radius:8px;padding:0 14px 0 40px;font-size:14px;outline:none;background:#fafafa}.search input:focus{border-color:var(--accent);background:#fff}.search:before{content:"⌕";position:absolute;left:14px;top:6px;font-size:24px;color:#777}
-main{max-width:1050px;margin:28px auto;padding:0 20px}.heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:15px}.heading h1{font-size:22px;margin:0;font-weight:700}.count{font-size:13px;color:var(--muted)}
-#apps{display:flex;flex-direction:column;gap:12px}.app{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:17px 18px;display:grid;grid-template-columns:76px minmax(0,1fr);gap:17px}.app-logo{width:76px;height:76px;border-radius:15px;object-fit:cover;background:#f0f0f0;align-self:start}.app-content{min-width:0}.app-name{font-size:18px;font-weight:700;margin:2px 0 7px;overflow-wrap:anywhere}.app-about{font-size:14px;color:#62666a;line-height:1.5;margin:0 0 13px;overflow-wrap:anywhere}.download{display:inline-flex;align-items:center;justify-content:center;min-width:126px;height:38px;padding:0 20px;border-radius:6px;background:var(--accent);color:white;text-decoration:none;font-size:14px;font-weight:700;transition:filter .15s}.download:hover{filter:brightness(.92)}.empty{background:white;border:1px dashed #d7d7d7;padding:40px 20px;text-align:center;border-radius:10px;color:var(--muted);line-height:1.6}.empty strong{display:block;color:var(--text);font-size:16px;margin-bottom:5px}
-footer{max-width:1050px;margin:30px auto;padding:16px 20px;color:#929292;font-size:12px}
-@media(max-width:560px){.top{padding:14px 15px;flex-wrap:wrap}.brand{font-size:19px}.search{max-width:none;order:2;flex-basis:100%}main{padding:0 14px;margin:20px auto}.app{grid-template-columns:64px minmax(0,1fr);gap:13px;padding:14px}.app-logo{width:64px;height:64px;border-radius:13px}.app-name{font-size:16px}.app-about{font-size:13px}.download{height:36px;min-width:116px}}
-</style>
+<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<header><div class="top"><div class="brand">Games<span>Installer</span></div><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label></div></header>
+<header class="site-header"><div class="top"><div class="brand">Games<span>Installer</span></div><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label><button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings">⚙</button></div></header>
 <main><div class="heading"><h1>Games</h1><div class="count" id="count">0 apps</div></div><section id="apps" aria-live="polite"><div class="empty"><strong>Loading games...</strong>Please wait.</div></section></main>
 <footer>Discover and download your favorite games.</footer>
 <script>
@@ -112,5 +101,59 @@ search.addEventListener("input", () => {
 });
 init();
 </script>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences" hidden>
+  <div class="cookie-top">
+    <div class="cookie-icon" aria-hidden="true">◉</div>
+    <div class="cookie-copy">
+      <strong>Cookie preferences</strong>
+      <p>We use a preference cookie to remember your theme and accent color on this device. This page does not use tracking cookies.</p>
+    </div>
+  </div>
+  <div class="cookie-actions">
+    <button class="cookie-reject" type="button" data-cookie-action="reject">Only necessary</button>
+    <button class="cookie-customize" type="button" data-cookie-action="customize">Customize</button>
+    <button class="cookie-accept" type="button" data-cookie-action="accept">Allow preferences</button>
+  </div>
+</div>
+
+<div class="dialog-backdrop" id="settings-modal" hidden>
+  <section class="settings-dialog" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="dialog-heading">
+      <div>
+        <h2 id="settings-title">Appearance settings</h2>
+        <p>Choose how Games Installer looks on this device.</p>
+      </div>
+      <button class="dialog-close" id="settings-close" type="button" aria-label="Close settings">×</button>
+    </div>
+
+    <div class="setting-group">
+      <span class="setting-label">Theme</span>
+      <div class="theme-options">
+        <button class="theme-option" type="button" data-theme-value="system" aria-pressed="true">System</button>
+        <button class="theme-option" type="button" data-theme-value="light" aria-pressed="false">Light</button>
+        <button class="theme-option" type="button" data-theme-value="dark" aria-pressed="false">Dark</button>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <span class="setting-label">Accent color</span>
+      <div class="accent-options">
+        <button class="accent-option" type="button" style="--swatch:#f44336" data-accent-value="#f44336" aria-label="Red" aria-pressed="true"></button>
+        <button class="accent-option" type="button" style="--swatch:#ff7043" data-accent-value="#ff7043" aria-label="Orange" aria-pressed="false"></button>
+        <button class="accent-option" type="button" style="--swatch:#3b82f6" data-accent-value="#3b82f6" aria-label="Blue" aria-pressed="false"></button>
+        <button class="accent-option" type="button" style="--swatch:#16a34a" data-accent-value="#16a34a" aria-label="Green" aria-pressed="false"></button>
+        <button class="accent-option" type="button" style="--swatch:#8b5cf6" data-accent-value="#8b5cf6" aria-label="Purple" aria-pressed="false"></button>
+      </div>
+    </div>
+
+    <p class="settings-note">Your appearance choices are stored in a first-party browser cookie only after you allow preference cookies. Choose “Only necessary” to keep the default appearance without saving these preferences.</p>
+    <div class="dialog-actions">
+      <button class="secondary-button" id="settings-cancel" type="button">Cancel</button>
+      <button class="primary-button" id="settings-save" type="button">Save preferences</button>
+    </div>
+  </section>
+</div>
+<script src="./settings.js"></script>
 </body>
 </html>
