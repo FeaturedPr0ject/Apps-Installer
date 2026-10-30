@@ -1,24 +1,24 @@
-# Games Installer
+# Apps Installer
 
-Static game catalog frontend for Vercel. The UI reads its entire catalog from `games.json`; no sample apps are bundled.
+Static app catalog frontend for Vercel. The UI reads its entire catalog from `apps.json`; no sample apps are bundled.
 
-## Add a game
+## Add a app
 
-Add an object to the JSON array in `games.json`:
+Add an object to the JSON array in `apps.json`:
 
 ```json
 [
   {
-    "name": "Game name",
+    "name": "App name",
     "image": "https://example.com/icon.png",
-    "download": "https://example.com/game-download",
-    "about": "Short game description"
+    "download": "https://example.com/app-download",
+    "about": "Short app description"
   }
 ]
 ```
 
 Fields:
-- `name`: app/game name
+- `name`: app/app name
 - `image`: absolute HTTP(S) image URL
 - `download`: HTTP(S) download destination; the Download button opens this exact URL
 - `about`: description displayed below the name
@@ -33,22 +33,22 @@ Import this repository into Vercel. No build command is required; use the reposi
 
 ## Primary and extra download links
 
-Each game always keeps `download` as its main Download button. Add `downloaddl` only when the game has extra mirrors, platforms, or variants. This adds a separate arrow button beside the main Download button; the extra menu lists only `downloaddl` entries.
+Each app always keeps `download` as its main Download button. Add `downloaddl` only when the app has extra mirrors, platforms, or variants. This adds a separate arrow button beside the main Download button; the extra menu lists only `downloaddl` entries.
 
 ```json
 {
-  "name": "Example Game",
+  "name": "Example App",
   "image": "https://example.com/icon.png",
-  "about": "Game description",
+  "about": "App description",
   "download": "https://example.com/main-installer.exe",
   "downloaddl": [
     {
       "name": "Mirror 1",
-      "url": "https://mirror-one.example.com/game.exe"
+      "url": "https://mirror-one.example.com/app.exe"
     },
     {
       "name": "Portable version",
-      "url": "https://example.com/game-portable.zip"
+      "url": "https://example.com/app-portable.zip"
     }
   ]
 }
@@ -59,7 +59,7 @@ When `downloaddl` is missing or empty, only the primary Download button is shown
 
 ## Create your own small ad
 
-Edit `ad.json` to control the single compact ad card shown above the game list. It is disabled by default. Set `enabled` to `true`, then add your title, description, image and destination URL.
+Edit `ad.json` to control the single compact ad card shown above the app list. It is disabled by default. Set `enabled` to `true`, then add your title, description, image and destination URL.
 
 ```json
 {
@@ -80,4 +80,4 @@ Set `enabled` to `false` to hide it. The ad is a single manually managed placeme
 
 The optional ad is displayed as a centered, draggable Windows XP-style dialog on every page visit when `enabled` is true. It can be closed using the title-bar X or the Escape key. Clicking the dark background does not close it. The title bar can be dragged to move the window. Adjust `popupDelayMs` in `ad.json` to change the display delay.
 
-The popup uses adapted window, title-bar and button styling from [ShizukuIchi/winXP](https://github.com/ShizukuIchi/winXP). The original project is MIT licensed. Its MIT copyright and permission notice are included at `LICENSES/WinXP-MIT.txt`. This project uses CSS styling only and does not bundle the original Windows XP desktop or image assets. Windows XP names, artwork and trademarks belong to Microsoft; Games Installer is not affiliated with or endorsed by Microsoft.
+The popup uses adapted window, title-bar and button styling from [ShizukuIchi/winXP](https://github.com/ShizukuIchi/winXP). The original project is MIT licensed. Its MIT copyright and permission notice are included at `LICENSES/WinXP-MIT.txt`. This project uses CSS styling only and does not bundle the original Windows XP desktop or image assets. Windows XP names, artwork and trademarks belong to Microsoft; Apps Installer is not affiliated with or endorsed by Microsoft.
