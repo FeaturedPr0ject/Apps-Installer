@@ -95,7 +95,7 @@ header.site-header {
   width: 42px;
   height: 42px;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -106,6 +106,7 @@ header.site-header {
   transition: border-color .15s, background-color .15s;
 }
 .icon-button:hover { border-color: var(--accent); background: var(--surface-soft); }
+.icon-button svg { width: 20px; height: 20px; display: block; }
 main {
   max-width: 1050px;
   margin: 28px auto;
@@ -253,29 +254,38 @@ footer {
   color: var(--accent);
   font-weight: 700;
 }
-.accent-options { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.accent-option {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid var(--surface);
-  outline: 1px solid transparent;
-  background: var(--swatch);
-  cursor: pointer;
+.accent-select-wrap {
   position: relative;
+  width: 100%;
 }
-.accent-option[aria-pressed="true"] { outline-color: var(--text); }
-.accent-option[aria-pressed="true"]:after {
-  content: "✓";
-  color: white;
-  text-shadow: 0 1px 3px rgba(0,0,0,.4);
+.accent-select-wrap:after {
+  content: "";
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 16px;
-  font-weight: 700;
+  right: 16px;
+  top: 17px;
+  width: 8px;
+  height: 8px;
+  border-right: 1.8px solid var(--muted);
+  border-bottom: 1.8px solid var(--muted);
+  transform: rotate(45deg);
+  pointer-events: none;
 }
+.accent-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 42px 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  outline: none;
+  background: var(--surface-soft);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+}
+.accent-select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 15%, transparent); }
+.accent-select option { background: var(--surface); color: var(--text); }
 .settings-note {
   color: var(--muted);
   font-size: 12px;
@@ -311,15 +321,17 @@ footer {
 }
 .cookie-top { display: flex; gap: 12px; align-items: flex-start; }
 .cookie-icon {
-  flex: 0 0 38px;
-  height: 38px;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
-  border-radius: 10px;
+  border-radius: 50%;
   background: color-mix(in srgb, var(--accent) 12%, var(--surface));
   color: var(--accent);
   font-size: 19px;
 }
+.cookie-icon svg { width: 22px; height: 22px; display: block; }
 .cookie-copy { min-width: 0; }
 .cookie-copy strong { display: block; font-size: 14px; margin: 1px 0 5px; }
 .cookie-copy p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
