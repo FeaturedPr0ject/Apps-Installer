@@ -26,7 +26,13 @@
     {
       "name": "ChatGPT Classic",
       "url": "https://get.microsoft.com/installer/download/9NT1R1C2HH7J?cid=website_cta_psi"
-    }
+    },
+  {
+    "name": "Proton VPN",
+    "image": "https://protonvpn.com/favicons/android-chrome-192x192.png",
+    "download": "https://protonvpn.com/download/ProtonVPN_v5.1.8_x64.exe",
+    "about": "The Proton VPN app for Windows is the best way to ensure safety and privacy while browsing the internet. It is open-source, easy to use, and packed with useful security features."
+  }
   ]
 }
 ]
