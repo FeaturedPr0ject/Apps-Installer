@@ -1,5 +1,4 @@
 (() => {
-  const SESSION_KEY = "games_installer_ad_popup_seen";
   const root = document.getElementById("ad-popup-root");
   if (!root) return;
 
@@ -11,20 +10,6 @@
     } catch {
       return "";
     }
-  }
-
-  function wasShownThisSession() {
-    try {
-      return sessionStorage.getItem(SESSION_KEY) === "1";
-    } catch {
-      return false;
-    }
-  }
-
-  function markShownThisSession() {
-    try {
-      sessionStorage.setItem(SESSION_KEY, "1");
-    } catch {}
   }
 
   function createElement(tag, className, text) {
@@ -102,6 +87,52 @@
     let previousFocus = null;
     let previousOverflow = "";
 
+    let dragState = null;
+    let translateX = 0;
+    let translateY = 0;
+
+    titlebar.addEventListener("pointerdown", event => {
+      if (event.button !== 0 || event.target.closest("button")) return;
+      const rect = dialog.getBoundingClientRect();
+      dragState = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        rectLeft: rect.left,
+        rectTop: rect.top,
+        startTranslateX: translateX,
+        startTranslateY: translateY
+      };
+      titlebar.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+
+    titlebar.addEventListener("pointermove", event => {
+      if (!dragState || event.pointerId !== dragState.pointerId) return;
+      const rect = dialog.getBoundingClientRect();
+      const dx = event.clientX - dragState.startX;
+      const dy = event.clientY - dragState.startY;
+      const minDx = 12 - dragState.rectLeft;
+      const maxDx = window.innerWidth - 12 - (dragState.rectLeft + rect.width);
+      const minDy = 12 - dragState.rectTop;
+      const maxDy = window.innerHeight - 12 - (dragState.rectTop + rect.height);
+      const boundedDx = Math.min(Math.max(dx, minDx), Math.max(minDx, maxDx));
+      const boundedDy = Math.min(Math.max(dy, minDy), Math.max(minDy, maxDy));
+      translateX = dragState.startTranslateX + boundedDx;
+      translateY = dragState.startTranslateY + boundedDy;
+      dialog.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
+    });
+
+    const endDrag = event => {
+      if (!dragState || (event && event.pointerId !== dragState.pointerId)) return;
+      if (titlebar.hasPointerCapture(dragState.pointerId)) {
+        titlebar.releasePointerCapture(dragState.pointerId);
+      }
+      dragState = null;
+    };
+    titlebar.addEventListener("pointerup", endDrag);
+    titlebar.addEventListener("pointercancel", endDrag);
+
     function closePopup() {
       if (overlay.hidden) return;
       overlay.hidden = true;
@@ -117,9 +148,6 @@
 
     closeButton.addEventListener("click", closePopup);
     footerClose.addEventListener("click", closePopup);
-    overlay.addEventListener("click", event => {
-      if (event.target === overlay) closePopup();
-    });
     if (targetUrl) {
       footer.querySelector(".xp-ad-button-primary").addEventListener("click", closePopup);
     }
@@ -143,10 +171,12 @@
       show() {
         previousFocus = document.activeElement;
         previousOverflow = document.body.style.overflow;
+        translateX = 0;
+        translateY = 0;
+        dialog.style.transform = "";
         overlay.hidden = false;
         document.body.classList.add("xp-ad-open");
         document.body.style.overflow = "hidden";
-        markShownThisSession();
         document.addEventListener("keydown", onEscape);
         closeButton.focus();
       }
@@ -159,7 +189,6 @@
       if (!response.ok) return;
       const ad = await response.json();
       if (!ad || ad.enabled !== true) return;
-      if (ad.showOncePerSession !== false && wasShownThisSession()) return;
 
       const popup = buildPopup(ad);
       if (!popup) return;
