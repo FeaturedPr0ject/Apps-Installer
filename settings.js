@@ -101,10 +101,11 @@
       updateControls();
       applySettings(draftSettings);
     }
-    if (event.target === accentSelect) {
-      draftSettings.accent = accentSelect.value;
-      applySettings(draftSettings);
-    }
+  });
+
+  accentSelect?.addEventListener("change", () => {
+    draftSettings.accent = accentSelect.value;
+    applySettings(draftSettings);
   });
 
   document.addEventListener("keydown", event => {
