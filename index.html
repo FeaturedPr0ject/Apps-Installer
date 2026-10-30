@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<header class="site-header"><div class="top"><div class="brand">Games<span>Installer</span></div><nav class="main-nav" aria-label="Main sections"><button class="nav-tab active" type="button" data-view="games" aria-pressed="true">Games</button><button class="nav-tab" type="button" data-view="downloads" aria-pressed="false">Downloads <span class="download-badge" id="download-badge">0</span></button></nav><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label><button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 0 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/></svg></button></div></header>
-<main><section class="page-view" id="games-view"><div class="heading"><h1>Games</h1><div class="count" id="count">0 apps</div></div><section id="apps" aria-live="polite"><div class="empty"><strong>Loading games...</strong>Please wait.</div></section></section><section class="page-view" id="downloads-view" hidden><div class="heading"><h1>Downloads</h1><button class="clear-downloads" id="clear-downloads" type="button">Clear history</button></div><p class="page-description">Your recently opened download links appear here.</p><section id="download-items" aria-live="polite"><div class="empty"><strong>No downloads yet</strong>Choose a game and press Download.</div></section></section></main>
+<header class="site-header"><div class="top"><div class="brand">Games<span>Installer</span></div><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label><button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 0 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/></svg></button></div></header>
+<main><div class="heading"><h1>Games</h1><div class="count" id="count">0 apps</div></div><section id="apps" aria-live="polite"><div class="empty"><strong>Loading games...</strong>Please wait.</div></section></main>
 <footer>Discover and download your favorite games.</footer>
 <script>
 const CATALOG_URL = "./games.json";
@@ -24,14 +24,34 @@ function safeHttpUrl(value) {
     return url.protocol === "https:" || url.protocol === "http:" ? url.href : "";
   } catch { return ""; }
 }
-function getDownloadInfo(value) {
-  if (typeof value === "string") return { url: safeHttpUrl(value), filename: "" };
-  if (value && typeof value === "object") {
-    const url = safeHttpUrl(value.url || value.link || value.href);
-    const filename = typeof value.filename === "string" ? value.filename.trim() : "";
-    return { url, filename };
+function getDownloadOptions(value) {
+  const normalize = (entry, fallbackName = "Download") => {
+    if (typeof entry === "string") return { name: fallbackName, url: safeHttpUrl(entry), filename: "" };
+    if (!entry || typeof entry !== "object") return null;
+    const name = entry.name || entry.label || entry.platform || entry.version || fallbackName;
+    const url = safeHttpUrl(entry.url || entry.link || entry.href);
+    const filename = typeof entry.filename === "string" ? entry.filename.trim() : "";
+    return url ? { name: String(name), url, filename } : null;
+  };
+
+  if (typeof value === "string") {
+    const option = normalize(value);
+    return option ? [option] : [];
   }
-  return { url: "", filename: "" };
+  if (Array.isArray(value)) {
+    return value.map((entry, index) => normalize(entry, "Download " + (index + 1))).filter(Boolean);
+  }
+  if (value && typeof value === "object") {
+    if (Array.isArray(value.options)) {
+      return value.options.map((entry, index) => normalize(entry, "Download " + (index + 1))).filter(Boolean);
+    }
+    if (value.url || value.link || value.href) {
+      const option = normalize(value);
+      return option ? [option] : [];
+    }
+    return Object.entries(value).map(([name, entry]) => normalize(entry, name)).filter(Boolean);
+  }
+  return [];
 }
 function render(items) {
   list.replaceChildren();
@@ -61,25 +81,44 @@ function render(items) {
     const about = document.createElement("p");
     about.className = "app-about";
     about.textContent = game.about;
-    const link = document.createElement("a");
-    link.className = "download";
-    link.textContent = "Download";
-    const downloadInfo = getDownloadInfo(game.download);
-    const downloadUrl = downloadInfo.url;
-    if (downloadUrl) {
-      link.href = downloadUrl;
+    const downloadWrap = document.createElement("div");
+    downloadWrap.className = "download-wrap";
+    const toggle = document.createElement("button");
+    toggle.className = "download-toggle";
+    toggle.type = "button";
+    toggle.textContent = "Download";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-haspopup", "true");
+    const chevron = document.createElement("span");
+    chevron.className = "download-chevron";
+    chevron.setAttribute("aria-hidden", "true");
+    chevron.textContent = "⌄";
+    toggle.append(chevron);
+
+    const menu = document.createElement("div");
+    menu.className = "download-menu";
+    menu.setAttribute("role", "menu");
+    menu.hidden = true;
+
+    const options = getDownloadOptions(game.download);
+    if (!options.length) {
+      toggle.disabled = true;
+      toggle.title = "No download links available";
+    }
+    options.forEach(option => {
+      const link = document.createElement("a");
+      link.className = "download-option";
+      link.setAttribute("role", "menuitem");
+      link.textContent = option.name;
+      link.href = option.url;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      link.dataset.downloadName = game.name;
-      link.dataset.downloadImage = safeHttpUrl(game.image);
-      if (downloadInfo.filename && new URL(downloadUrl).origin === location.origin) link.download = downloadInfo.filename;
-    } else {
-      link.href = "#";
-      link.setAttribute("aria-disabled", "true");
-      link.style.opacity = ".5";
-      link.addEventListener("click", event => event.preventDefault());
-    }
-    content.append(name, about, link);
+      if (option.filename && new URL(option.url).origin === location.origin) link.download = option.filename;
+      menu.append(link);
+    });
+
+    downloadWrap.append(toggle, menu);
+    content.append(name, about, downloadWrap);
     card.append(logo, content);
     list.append(card);
   }
@@ -94,7 +133,7 @@ async function init() {
       item && typeof item.name === "string" &&
       typeof item.image === "string" &&
       (typeof item.download === "string" || (item.download && typeof item.download === "object")) &&
-      getDownloadInfo(item.download).url &&
+      getDownloadOptions(item.download).length > 0 &&
       typeof item.about === "string"
     );
     render(games);
