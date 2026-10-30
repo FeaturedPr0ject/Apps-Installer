@@ -162,8 +162,10 @@ body.xp-ad-open {
   overflow-wrap: anywhere;
 }
 .xp-ad-footer {
-  min-height: 48px;
-  padding: 8px 12px;
+  height: 42px;
+  min-height: 42px;
+  margin: 0;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -173,6 +175,7 @@ body.xp-ad-open {
 }
 .xp-ad-button {
   min-width: 84px;
+  height: 25px;
   min-height: 25px;
   padding: 3px 12px;
   display: inline-flex;
@@ -221,5 +224,5 @@ body.xp-ad-open {
   }
   .xp-ad-title { font-size: 14px; }
   .xp-ad-description { font-size: 11px; }
-  .xp-ad-footer { min-height: 44px; padding: 7px 9px; }
+  .xp-ad-footer { height: 40px; min-height: 40px; padding: 5px 9px; }
 }
