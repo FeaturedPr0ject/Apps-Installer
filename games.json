@@ -34,5 +34,11 @@
     "image": "https://protonvpn.com/favicons/android-chrome-192x192.png",
     "download": "https://protonvpn.com/download/ProtonVPN_v5.1.8_x64.exe",
     "about": "The Proton VPN app for Windows is the best way to ensure safety and privacy while browsing the internet. It is open-source, easy to use, and packed with useful security features."
+  },
+  {
+    "name": "PSTools",
+    "image": "https://learn.microsoft.com/en-us/sysinternals/downloads/media/shared/download_sm.png",
+    "download": "https://download.sysinternals.com/files/PSTools.zip",
+    "about": "Utilities like Telnet and remote control programs like Symantec's PC Anywhere let you execute programs on remote systems, but they can be a pain to set up and require that you install client software on the remote systems that you wish to access. "
   }
 ]
