@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Games Installer</title>
+<style>
+:root{color-scheme:light;--accent:#f44336;--text:#202124;--muted:#70757a;--line:#e8e8e8;--surface:#fff;--bg:#f7f7f7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top{max-width:1050px;margin:auto;padding:18px 20px;display:flex;align-items:center;gap:14px}
+.brand{font-size:21px;font-weight:750;letter-spacing:-.5px;white-space:nowrap}.brand span{color:var(--accent)}
+.search{margin-left:auto;max-width:390px;width:100%;position:relative}.search input{width:100%;height:42px;border:1px solid #dedede;border-radius:8px;padding:0 14px 0 40px;font-size:14px;outline:none;background:#fafafa}.search input:focus{border-color:var(--accent);background:#fff}.search:before{content:"⌕";position:absolute;left:14px;top:6px;font-size:24px;color:#777}
+main{max-width:1050px;margin:28px auto;padding:0 20px}.heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:15px}.heading h1{font-size:22px;margin:0;font-weight:700}.count{font-size:13px;color:var(--muted)}
+#apps{display:flex;flex-direction:column;gap:12px}.app{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:17px 18px;display:grid;grid-template-columns:76px minmax(0,1fr);gap:17px}.app-logo{width:76px;height:76px;border-radius:15px;object-fit:cover;background:#f0f0f0;align-self:start}.app-content{min-width:0}.app-name{font-size:18px;font-weight:700;margin:2px 0 7px;overflow-wrap:anywhere}.app-about{font-size:14px;color:#62666a;line-height:1.5;margin:0 0 13px;overflow-wrap:anywhere}.download{display:inline-flex;align-items:center;justify-content:center;min-width:126px;height:38px;padding:0 20px;border-radius:6px;background:var(--accent);color:white;text-decoration:none;font-size:14px;font-weight:700;transition:filter .15s}.download:hover{filter:brightness(.92)}.empty{background:white;border:1px dashed #d7d7d7;padding:40px 20px;text-align:center;border-radius:10px;color:var(--muted);line-height:1.6}.empty strong{display:block;color:var(--text);font-size:16px;margin-bottom:5px}
+footer{max-width:1050px;margin:30px auto;padding:16px 20px;color:#929292;font-size:12px}
+@media(max-width:560px){.top{padding:14px 15px;flex-wrap:wrap}.brand{font-size:19px}.search{max-width:none;order:2;flex-basis:100%}main{padding:0 14px;margin:20px auto}.app{grid-template-columns:64px minmax(0,1fr);gap:13px;padding:14px}.app-logo{width:64px;height:64px;border-radius:13px}.app-name{font-size:16px}.app-about{font-size:13px}.download{height:36px;min-width:116px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand">Games<span>Installer</span></div><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label></div></header>
+<main><div class="heading"><h1>Games</h1><div class="count" id="count">0 apps</div></div><section id="apps" aria-live="polite"><div class="empty"><strong>Loading games...</strong>Please wait.</div></section></main>
+<footer>Game information is loaded from the JSON catalog.</footer>
+<script>
+const CATALOG_URL = "./games.json";
+const list = document.getElementById("apps");
+const search = document.getElementById("search");
+const count = document.getElementById("count");
+let games = [];
+
+function safeHttpUrl(value) {
+  try {
+    const url = new URL(value, window.location.href);
+    return url.protocol === "https:" || url.protocol === "http:" ? url.href : "";
+  } catch { return ""; }
+}
+function render(items) {
+  list.replaceChildren();
+  count.textContent = items.length + (items.length === 1 ? " app" : " apps");
+  if (!items.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    const title = document.createElement("strong");
+    title.textContent = games.length ? "No matching games" : "No games yet";
+    empty.append(title, document.createTextNode(games.length ? "Try another search." : "Add game entries to games.json to display them here."));
+    list.append(empty);
+    return;
+  }
+  for (const game of items) {
+    const card = document.createElement("article");
+    card.className = "app";
+    const logo = document.createElement("img");
+    logo.className = "app-logo";
+    logo.alt = "";
+    logo.loading = "lazy";
+    logo.src = safeHttpUrl(game.image) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='76' height='76'%3E%3Crect width='100%25' height='100%25' rx='14' fill='%23eeeeee'/%3E%3C/svg%3E";
+    const content = document.createElement("div");
+    content.className = "app-content";
+    const name = document.createElement("div");
+    name.className = "app-name";
+    name.textContent = game.name;
+    const about = document.createElement("p");
+    about.className = "app-about";
+    about.textContent = game.about;
+    const link = document.createElement("a");
+    link.className = "download";
+    link.textContent = "Download";
+    const downloadUrl = safeHttpUrl(game.download);
+    if (downloadUrl) {
+      link.href = downloadUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    } else {
+      link.href = "#";
+      link.setAttribute("aria-disabled", "true");
+      link.style.opacity = ".5";
+      link.addEventListener("click", event => event.preventDefault());
+    }
+    content.append(name, about, link);
+    card.append(logo, content);
+    list.append(card);
+  }
+}
+async function init() {
+  try {
+    const response = await fetch(CATALOG_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error("Unable to load games.json (" + response.status + ")");
+    const data = await response.json();
+    if (!Array.isArray(data)) throw new Error("games.json must contain a JSON array");
+    games = data.filter(item =>
+      item && typeof item.name === "string" &&
+      typeof item.image === "string" &&
+      typeof item.download === "string" &&
+      typeof item.about === "string"
+    );
+    render(games);
+  } catch (error) {
+    list.replaceChildren();
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    const title = document.createElement("strong");
+    title.textContent = "Could not load game catalog";
+    empty.append(title, document.createTextNode(error.message));
+    list.append(empty);
+    count.textContent = "0 apps";
+  }
+}
+search.addEventListener("input", () => {
+  const query = search.value.trim().toLocaleLowerCase();
+  render(games.filter(game => (game.name + " " + game.about).toLocaleLowerCase().includes(query)));
+});
+init();
+</script>
+</body>
+</html>
