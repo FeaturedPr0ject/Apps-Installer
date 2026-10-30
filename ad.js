@@ -55,6 +55,13 @@
         content.append(description);
       }
 
+      if (targetUrl) {
+        const cta = document.createElement("span");
+        cta.className = "ad-cta";
+        cta.textContent = typeof ad.button === "string" && ad.button.trim() ? ad.button.trim() : "Learn more";
+        content.append(cta);
+      }
+
       card.append(content, badge);
 
       if (targetUrl) {
