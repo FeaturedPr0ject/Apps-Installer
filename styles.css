@@ -424,36 +424,42 @@ footer {
 
 
 
-/* Per-game download dropdown */
+/* Split download buttons and per-game extra links */
 .app { position: relative; }
 .download-wrap {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: stretch;
+  gap: 6px;
   z-index: 2;
 }
-.download-toggle {
+.download-main {
   min-width: 142px;
-  min-height: 38px;
-  padding: 0 14px 0 18px;
+  height: 42px;
+  border-radius: 7px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+}
+.download-expand {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--accent);
   border-radius: 7px;
   background: var(--accent);
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 700;
   cursor: pointer;
   transition: filter .15s, box-shadow .15s;
 }
-.download-toggle:hover { filter: brightness(.94); }
-.download-toggle:focus-visible {
+.download-expand:hover { filter: brightness(.94); }
+.download-expand:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
   outline-offset: 2px;
 }
-.download-toggle:disabled { opacity: .5; cursor: not-allowed; }
 .download-chevron {
   width: 8px;
   height: 8px;
@@ -463,7 +469,10 @@ footer {
   transform: rotate(45deg);
   transition: transform .18s;
 }
-.download-toggle[aria-expanded="true"] .download-chevron { transform: rotate(225deg); margin-top: 4px; }
+.download-expand[aria-expanded="true"] .download-chevron {
+  transform: rotate(225deg);
+  margin-top: 4px;
+}
 .download-menu {
   position: absolute;
   left: 0;
@@ -486,7 +495,6 @@ footer {
   padding: 0 11px;
   display: flex;
   align-items: center;
-  gap: 0;
   border-radius: 7px;
   color: var(--text);
   text-decoration: none;
@@ -494,7 +502,6 @@ footer {
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
-.download-option:before { content: none; display: none; }
 .download-option:hover,
 .download-option:focus-visible {
   outline: none;
@@ -503,5 +510,6 @@ footer {
 }
 .app.dropdown-open { z-index: 10; }
 @media (max-width: 560px) {
-  .download-toggle { min-height: 36px; min-width: 132px; }
+  .download-main { min-width: 132px; height: 38px; }
+  .download-expand { width: 38px; height: 38px; flex-basis: 38px; }
 }
