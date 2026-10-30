@@ -1,0 +1,74 @@
+.ad-slot {
+  margin: 0 0 16px;
+}
+.ad-slot[hidden] { display: none; }
+.ad-card {
+  position: relative;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 11px 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+}
+.ad-image {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  border-radius: 9px;
+  object-fit: cover;
+  background: var(--surface-soft);
+}
+.ad-content {
+  min-width: 0;
+  flex: 1;
+}
+.ad-title {
+  margin: 0 0 3px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.ad-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.ad-badge {
+  align-self: flex-start;
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .25px;
+  text-transform: uppercase;
+}
+.ad-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+.ad-card:has(.ad-link):hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+.ad-card:has(.ad-link):focus-within {
+  outline: 2px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  outline-offset: 2px;
+}
+@media (max-width: 560px) {
+  .ad-card { min-height: 68px; gap: 10px; padding: 9px 11px; }
+  .ad-image { width: 46px; height: 46px; flex-basis: 46px; }
+  .ad-title { font-size: 13px; }
+  .ad-description { font-size: 11px; }
+}
