@@ -1,5 +1,5 @@
 {
-  "enabled": false,
+  "enabled": true,
   "badge": "Please use itt!",
   "title": "ServerTrace Extension",
   "description": "The extension can read all server in 1 webiste trace!",
