@@ -28,23 +28,33 @@ Fields:
 Import this repository into Vercel. No build command is required; use the repository root as the output directory.
 
 
-## Download behavior
 
-The Games page uses the existing `download` field as the destination. Clicking Download opens that URL and adds the app to the separate Downloads history view on this device. The history is stored locally in the browser and can be cleared at any time. The site records that a link was opened; the browser or destination server manages the actual transfer and its progress.
+## Per-game download dropdown
 
-The `download` field accepts either a URL string:
-
-```json
-"download": "https://example.com/game-setup.exe"
-```
-
-Or an object for a named direct-download file:
+Each game card has its own **Download** dropdown. Every option is built from that game's `download` field. Use an array when one game has multiple platforms or installer variants:
 
 ```json
-"download": {
-  "url": "https://example.com/game-setup.exe",
-  "filename": "GameSetup.exe"
+{
+  "name": "Example Game",
+  "image": "https://example.com/icon.png",
+  "about": "Game description",
+  "download": [
+    {
+      "name": "Windows 64-bit",
+      "url": "https://example.com/game-win64.exe"
+    },
+    {
+      "name": "Android APK",
+      "url": "https://example.com/game.apk"
+    }
+  ]
 }
 ```
 
-The optional filename is applied only for same-origin links, because browsers restrict forced downloads from other domains. External links continue to open at the exact provided destination.
+Supported formats:
+- A string URL: displays one dropdown choice named `Download`.
+- An array of objects: each `name` and `url` becomes one choice.
+- An object map: keys become choice names and values are URLs, for example `"download": {"Windows": "https://...", "Android": "https://..."}`.
+- A single object with `name` and `url` is also accepted. Optional `filename` is applied only for same-origin downloads.
+
+The dropdown belongs to its own game card; selecting an option opens that exact URL in a new tab. Actual download behavior depends on the destination server and browser.
