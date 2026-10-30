@@ -30,29 +30,28 @@ Import this repository into Vercel. No build command is required; use the reposi
 
 
 
-## Optional per-game dropdown field
 
-The special dropdown is enabled only when a game object contains `downloaddl`. The existing `download` field is not replaced and remains the normal single Download link for games that do not use the special dropdown.
+## Primary and extra download links
 
-Example with the special dropdown:
+Each game always keeps `download` as its main Download button. Add `downloaddl` only when the game has extra mirrors, platforms, or variants. This adds a separate arrow button beside the main Download button; the extra menu lists only `downloaddl` entries.
 
 ```json
 {
   "name": "Example Game",
   "image": "https://example.com/icon.png",
   "about": "Game description",
-  "download": "https://example.com/default-download",
+  "download": "https://example.com/main-installer.exe",
   "downloaddl": [
     {
-      "name": "Windows 64-bit",
-      "url": "https://example.com/game-win64.exe"
+      "name": "Mirror 1",
+      "url": "https://mirror-one.example.com/game.exe"
     },
     {
-      "name": "Android APK",
-      "url": "https://example.com/game.apk"
+      "name": "Portable version",
+      "url": "https://example.com/game-portable.zip"
     }
   ]
 }
 ```
 
-When `downloaddl` is absent, the page uses `download` as a regular link, preserving all existing game entries unchanged. Supported `downloaddl` formats are an array of option objects, an object with an `options` array, a single option object, or a name-to-URL object map. Each option can use `name` (or `label`, `platform`, `version`) and `url` (or `link`, `href`).
+When `downloaddl` is missing or empty, only the primary Download button is shown. Existing `download` URLs are not replaced or converted. The extra field accepts an array of option objects, an object with an `options` array, a single option object, or a name-to-URL object map.
