@@ -72,3 +72,17 @@
   .ad-title { font-size: 13px; }
   .ad-description { font-size: 11px; }
 }
+
+.ad-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 7px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+}
+.ad-cta:after {
+  content: "↗";
+  margin-left: 5px;
+  font-size: 12px;
+}
