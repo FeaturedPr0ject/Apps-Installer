@@ -76,10 +76,6 @@
       footer.append(action);
     }
 
-    const footerClose = createElement("button", "xp-ad-button", "Close");
-    footerClose.type = "button";
-    footer.append(footerClose);
-
     dialog.append(titlebar, body, footer);
     overlay.append(dialog);
     root.replaceChildren(overlay);
@@ -147,7 +143,6 @@
     }
 
     closeButton.addEventListener("click", closePopup);
-    footerClose.addEventListener("click", closePopup);
     if (targetUrl) {
       footer.querySelector(".xp-ad-button-primary").addEventListener("click", closePopup);
     }
