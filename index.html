@@ -21,7 +21,7 @@ footer{max-width:1050px;margin:30px auto;padding:16px 20px;color:#929292;font-si
 <body>
 <header><div class="top"><div class="brand">Games<span>Installer</span></div><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label></div></header>
 <main><div class="heading"><h1>Games</h1><div class="count" id="count">0 apps</div></div><section id="apps" aria-live="polite"><div class="empty"><strong>Loading games...</strong>Please wait.</div></section></main>
-<footer>Game information is loaded from the JSON catalog.</footer>
+<footer>Discover and download your favorite games.</footer>
 <script>
 const CATALOG_URL = "./games.json";
 const list = document.getElementById("apps");
@@ -43,7 +43,7 @@ function render(items) {
     empty.className = "empty";
     const title = document.createElement("strong");
     title.textContent = games.length ? "No matching games" : "No games yet";
-    empty.append(title, document.createTextNode(games.length ? "Try another search." : "Add game entries to games.json to display them here."));
+    empty.append(title, document.createTextNode(games.length ? "Try another search." : "New games will appear here soon."));
     list.append(empty);
     return;
   }
@@ -85,9 +85,9 @@ function render(items) {
 async function init() {
   try {
     const response = await fetch(CATALOG_URL, { cache: "no-store" });
-    if (!response.ok) throw new Error("Unable to load games.json (" + response.status + ")");
+    if (!response.ok) throw new Error("Unable to load the game list (" + response.status + ")");
     const data = await response.json();
-    if (!Array.isArray(data)) throw new Error("games.json must contain a JSON array");
+    if (!Array.isArray(data)) throw new Error("The game list has an invalid format");
     games = data.filter(item =>
       item && typeof item.name === "string" &&
       typeof item.image === "string" &&
