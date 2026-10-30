@@ -5,5 +5,7 @@
   "description": "The extension can read all server in 1 webiste trace!",
   "image": "https://i.ibb.co/wN6Zj1t3/Screenshot-2026-10-30-210106.png",
   "url": "https://github.com/FeaturedPr0ject/the-console-helper",
-  "button": "View Now Cuh 👀"
+  "button": "View Now Cuh 👀",
+  "showOncePerSession": true,
+  "popupDelayMs": 1100
 }
