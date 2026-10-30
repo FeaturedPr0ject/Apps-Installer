@@ -29,16 +29,20 @@ Import this repository into Vercel. No build command is required; use the reposi
 
 
 
-## Per-game download dropdown
 
-Each game card has its own **Download** dropdown. Every option is built from that game's `download` field. Use an array when one game has multiple platforms or installer variants:
+## Optional per-game dropdown field
+
+The special dropdown is enabled only when a game object contains `downloaddl`. The existing `download` field is not replaced and remains the normal single Download link for games that do not use the special dropdown.
+
+Example with the special dropdown:
 
 ```json
 {
   "name": "Example Game",
   "image": "https://example.com/icon.png",
   "about": "Game description",
-  "download": [
+  "download": "https://example.com/default-download",
+  "downloaddl": [
     {
       "name": "Windows 64-bit",
       "url": "https://example.com/game-win64.exe"
@@ -51,10 +55,4 @@ Each game card has its own **Download** dropdown. Every option is built from tha
 }
 ```
 
-Supported formats:
-- A string URL: displays one dropdown choice named `Download`.
-- An array of objects: each `name` and `url` becomes one choice.
-- An object map: keys become choice names and values are URLs, for example `"download": {"Windows": "https://...", "Android": "https://..."}`.
-- A single object with `name` and `url` is also accepted. Optional `filename` is applied only for same-origin downloads.
-
-The dropdown belongs to its own game card; selecting an option opens that exact URL in a new tab. Actual download behavior depends on the destination server and browser.
+When `downloaddl` is absent, the page uses `download` as a regular link, preserving all existing game entries unchanged. Supported `downloaddl` formats are an array of option objects, an object with an `options` array, a single option object, or a name-to-URL object map. Each option can use `name` (or `label`, `platform`, `version`) and `url` (or `link`, `href`).
