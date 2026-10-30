@@ -254,38 +254,91 @@ footer {
   color: var(--accent);
   font-weight: 700;
 }
-.accent-select-wrap {
-  position: relative;
+.accent-picker { width: 100%; }
+.accent-trigger {
   width: 100%;
-}
-.accent-select-wrap:after {
-  content: "";
-  position: absolute;
-  right: 16px;
-  top: 17px;
-  width: 8px;
-  height: 8px;
-  border-right: 1.8px solid var(--muted);
-  border-bottom: 1.8px solid var(--muted);
-  transform: rotate(45deg);
-  pointer-events: none;
-}
-.accent-select {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  min-height: 44px;
-  padding: 0 42px 0 13px;
+  min-height: 46px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   border: 1px solid var(--line);
-  border-radius: 9px;
-  outline: none;
+  border-radius: 10px;
   background: var(--surface-soft);
   color: var(--text);
   cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+  transition: border-color .15s, box-shadow .15s, background-color .15s;
+}
+.accent-trigger:hover,
+.accent-trigger[aria-expanded="true"] {
+  border-color: var(--accent);
+}
+.accent-trigger:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  outline-offset: 2px;
+}
+.accent-current { display: inline-flex; align-items: center; gap: 10px; }
+.accent-dot {
+  display: inline-block;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+}
+.accent-chevron {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .18s;
+}
+.accent-trigger[aria-expanded="true"] .accent-chevron { transform: rotate(180deg); }
+.accent-menu {
+  display: grid;
+  gap: 3px;
+  margin-top: 8px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+.accent-menu[hidden] { display: none; }
+.accent-choice {
+  width: 100%;
+  min-height: 39px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
   font-size: 14px;
 }
-.accent-select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 15%, transparent); }
-.accent-select option { background: var(--surface); color: var(--text); }
+.accent-choice:hover { background: var(--surface-soft); }
+.accent-choice[aria-selected="true"] {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--accent);
+  font-weight: 700;
+}
+.accent-check {
+  margin-left: auto;
+  opacity: 0;
+  font-size: 15px;
+}
+.accent-choice[aria-selected="true"] .accent-check { opacity: 1; }
 .settings-note {
   color: var(--muted);
   font-size: 12px;
