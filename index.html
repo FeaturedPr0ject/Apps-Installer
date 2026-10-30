@@ -26,7 +26,10 @@ function safeHttpUrl(value) {
 }
 function getDownloadOptions(value) {
   const normalize = (entry, fallbackName = "Download") => {
-    if (typeof entry === "string") return { name: fallbackName, url: safeHttpUrl(entry), filename: "" };
+    if (typeof entry === "string") {
+      const url = safeHttpUrl(entry);
+      return url ? { name: fallbackName, url, filename: "" } : null;
+    }
     if (!entry || typeof entry !== "object") return null;
     const name = entry.name || entry.label || entry.platform || entry.version || fallbackName;
     const url = safeHttpUrl(entry.url || entry.link || entry.href);
@@ -50,6 +53,13 @@ function getDownloadOptions(value) {
       return option ? [option] : [];
     }
     return Object.entries(value).map(([name, entry]) => normalize(entry, name)).filter(Boolean);
+  }
+  return [];
+}
+function getGameDownloadOptions(game) {
+  if (Object.prototype.hasOwnProperty.call(game, "downloaddl")) {
+    const specialOptions = getDownloadOptions(game.downloaddl);
+    if (specialOptions.length) return specialOptions;
   }
   return [];
 }
@@ -81,44 +91,59 @@ function render(items) {
     const about = document.createElement("p");
     about.className = "app-about";
     about.textContent = game.about;
-    const downloadWrap = document.createElement("div");
-    downloadWrap.className = "download-wrap";
-    const toggle = document.createElement("button");
-    toggle.className = "download-toggle";
-    toggle.type = "button";
-    toggle.textContent = "Download";
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-haspopup", "true");
-    const chevron = document.createElement("span");
-    chevron.className = "download-chevron";
-    chevron.setAttribute("aria-hidden", "true");
-    chevron.textContent = "⌄";
-    toggle.append(chevron);
+    const specialOptions = getGameDownloadOptions(game);
+    if (specialOptions.length) {
+      const downloadWrap = document.createElement("div");
+      downloadWrap.className = "download-wrap";
+      const toggle = document.createElement("button");
+      toggle.className = "download-toggle";
+      toggle.type = "button";
+      toggle.append(document.createTextNode("Download"));
+      const chevron = document.createElement("span");
+      chevron.className = "download-chevron";
+      chevron.setAttribute("aria-hidden", "true");
+      toggle.append(chevron);
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-haspopup", "true");
 
-    const menu = document.createElement("div");
-    menu.className = "download-menu";
-    menu.setAttribute("role", "menu");
-    menu.hidden = true;
+      const menu = document.createElement("div");
+      menu.className = "download-menu";
+      menu.setAttribute("role", "menu");
+      menu.hidden = true;
 
-    const options = getDownloadOptions(game.download);
-    if (!options.length) {
-      toggle.disabled = true;
-      toggle.title = "No download links available";
-    }
-    options.forEach(option => {
+      specialOptions.forEach(option => {
+        const link = document.createElement("a");
+        link.className = "download-option";
+        link.setAttribute("role", "menuitem");
+        link.textContent = option.name;
+        link.href = option.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.dataset.downloadName = game.name;
+        link.dataset.downloadImage = safeHttpUrl(game.image);
+        if (option.filename && new URL(option.url).origin === location.origin) link.download = option.filename;
+        menu.append(link);
+      });
+
+      downloadWrap.append(toggle, menu);
+      content.append(name, about, downloadWrap);
+    } else {
       const link = document.createElement("a");
-      link.className = "download-option";
-      link.setAttribute("role", "menuitem");
-      link.textContent = option.name;
-      link.href = option.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      if (option.filename && new URL(option.url).origin === location.origin) link.download = option.filename;
-      menu.append(link);
-    });
-
-    downloadWrap.append(toggle, menu);
-    content.append(name, about, downloadWrap);
+      link.className = "download";
+      link.textContent = "Download";
+      const legacyUrl = safeHttpUrl(game.download);
+      if (legacyUrl) {
+        link.href = legacyUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      } else {
+        link.href = "#";
+        link.setAttribute("aria-disabled", "true");
+        link.style.opacity = ".5";
+        link.addEventListener("click", event => event.preventDefault());
+      }
+      content.append(name, about, link);
+    }
     card.append(logo, content);
     list.append(card);
   }
@@ -132,9 +157,8 @@ async function init() {
     games = data.filter(item =>
       item && typeof item.name === "string" &&
       typeof item.image === "string" &&
-      (typeof item.download === "string" || (item.download && typeof item.download === "object")) &&
-      getDownloadOptions(item.download).length > 0 &&
-      typeof item.about === "string"
+      typeof item.about === "string" &&
+      (getGameDownloadOptions(item).length > 0 || Boolean(safeHttpUrl(item.download)))
     );
     render(games);
   } catch (error) {
