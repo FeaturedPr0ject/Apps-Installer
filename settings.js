@@ -86,6 +86,7 @@
 
   function closeSettings(restore = true) {
     if (restore) applySettings(savedSettings);
+    setAccentMenu(false);
     modal.hidden = true;
     document.body.style.overflow = "";
     settingsButton.focus();
