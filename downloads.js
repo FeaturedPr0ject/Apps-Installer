@@ -1,7 +1,7 @@
 (() => {
   function closeDropdown(wrap, restoreFocus = false) {
     if (!wrap) return;
-    const button = wrap.querySelector(".download-toggle");
+    const button = wrap.querySelector(".download-expand");
     const menu = wrap.querySelector(".download-menu");
     if (!button || !menu) return;
     menu.hidden = true;
@@ -17,7 +17,7 @@
   }
 
   document.addEventListener("click", event => {
-    const button = event.target.closest(".download-toggle");
+    const button = event.target.closest(".download-expand");
     if (button) {
       const wrap = button.closest(".download-wrap");
       const menu = wrap?.querySelector(".download-menu");
