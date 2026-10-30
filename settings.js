@@ -11,6 +11,7 @@
   const closeButton = document.getElementById("settings-close");
   const cancelButton = document.getElementById("settings-cancel");
   const saveButton = document.getElementById("settings-save");
+  const accentSelect = document.getElementById("accent-select");
   const metaTheme = document.querySelector('meta[name="theme-color"]');
 
   if (!banner || !modal || !settingsButton) return;
@@ -59,9 +60,7 @@
     modal.querySelectorAll("[data-theme-value]").forEach(button => {
       button.setAttribute("aria-pressed", String(button.dataset.themeValue === draftSettings.theme));
     });
-    modal.querySelectorAll("[data-accent-value]").forEach(button => {
-      button.setAttribute("aria-pressed", String(button.dataset.accentValue === draftSettings.accent));
-    });
+    if (accentSelect) accentSelect.value = draftSettings.accent;
   }
 
   function openSettings() {
@@ -102,10 +101,8 @@
       updateControls();
       applySettings(draftSettings);
     }
-    const accentButton = event.target.closest("[data-accent-value]");
-    if (accentButton) {
-      draftSettings.accent = accentButton.dataset.accentValue;
-      updateControls();
+    if (event.target === accentSelect) {
+      draftSettings.accent = accentSelect.value;
       applySettings(draftSettings);
     }
   });
