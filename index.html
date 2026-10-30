@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<header class="site-header"><div class="top"><div class="brand">Games<span>Installer</span></div><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label><button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings">⚙</button></div></header>
+<header class="site-header"><div class="top"><div class="brand">Games<span>Installer</span></div><label class="search"><input id="search" type="search" placeholder="Search games..." aria-label="Search games"></label><button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 0 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/></svg></button></div></header>
 <main><div class="heading"><h1>Games</h1><div class="count" id="count">0 apps</div></div><section id="apps" aria-live="polite"><div class="empty"><strong>Loading games...</strong>Please wait.</div></section></main>
 <footer>Discover and download your favorite games.</footer>
 <script>
@@ -104,7 +104,7 @@ init();
 
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences" hidden>
   <div class="cookie-top">
-    <div class="cookie-icon" aria-hidden="true">◉</div>
+    <div class="cookie-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 13.2A8.6 8.6 0 1 1 10.8 3.8a5.1 5.1 0 0 0 9.4 9.4Z"/><path d="M8 9h.01M11 14h.01M14 8h.01M7 15h.01"/></svg></div>
     <div class="cookie-copy">
       <strong>Cookie preferences</strong>
       <p>We use a preference cookie to remember your theme and accent color on this device. This page does not use tracking cookies.</p>
@@ -138,12 +138,14 @@ init();
 
     <div class="setting-group">
       <span class="setting-label">Accent color</span>
-      <div class="accent-options">
-        <button class="accent-option" type="button" style="--swatch:#f44336" data-accent-value="#f44336" aria-label="Red" aria-pressed="true"></button>
-        <button class="accent-option" type="button" style="--swatch:#ff7043" data-accent-value="#ff7043" aria-label="Orange" aria-pressed="false"></button>
-        <button class="accent-option" type="button" style="--swatch:#3b82f6" data-accent-value="#3b82f6" aria-label="Blue" aria-pressed="false"></button>
-        <button class="accent-option" type="button" style="--swatch:#16a34a" data-accent-value="#16a34a" aria-label="Green" aria-pressed="false"></button>
-        <button class="accent-option" type="button" style="--swatch:#8b5cf6" data-accent-value="#8b5cf6" aria-label="Purple" aria-pressed="false"></button>
+      <div class="accent-select-wrap">
+        <select class="accent-select" id="accent-select" aria-label="Accent color">
+          <option value="#f44336">Red</option>
+          <option value="#ff7043">Orange</option>
+          <option value="#3b82f6">Blue</option>
+          <option value="#16a34a">Green</option>
+          <option value="#8b5cf6">Purple</option>
+        </select>
       </div>
     </div>
 
