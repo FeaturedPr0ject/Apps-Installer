@@ -74,3 +74,10 @@ Edit `ad.json` to control the single compact ad card shown above the game list. 
 ```
 
 Set `enabled` to `false` to hide it. The ad is a single manually managed placement; it does not connect to an ad network or track visitors. Changes to `ad.json` appear after the Vercel deployment completes.
+
+
+## Windows XP style advertisement popup
+
+The optional ad is displayed as a centered, dismissible Windows XP-style dialog. It can be closed using the title-bar X, the Close button, the Escape key, or by clicking outside the window. By default it appears once per browser tab session; update `showOncePerSession` and `popupDelayMs` in `ad.json` to change this behavior.
+
+The popup uses adapted window, title-bar and button styling from [ShizukuIchi/winXP](https://github.com/ShizukuIchi/winXP). The original project is MIT licensed. Its MIT copyright and permission notice are included at `LICENSES/WinXP-MIT.txt`. This project uses CSS styling only and does not bundle the original Windows XP desktop or image assets. Windows XP names, artwork and trademarks belong to Microsoft; Games Installer is not affiliated with or endorsed by Microsoft.
