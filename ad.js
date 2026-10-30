@@ -38,7 +38,7 @@
     const titlebar = createElement("header", "xp-ad-titlebar");
     const titleIcon = createElement("span", "xp-ad-title-icon", "i");
     titleIcon.setAttribute("aria-hidden", "true");
-    const windowTitle = createElement("span", "xp-ad-window-title", "Games Installer - Advertisement");
+    const windowTitle = createElement("span", "xp-ad-window-title", "Apps Installer - Advertisement");
     const closeButton = createElement("button", "xp-ad-close");
     closeButton.type = "button";
     closeButton.setAttribute("aria-label", "Close advertisement");
