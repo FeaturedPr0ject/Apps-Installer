@@ -513,3 +513,47 @@ footer {
   .download-main { min-width: 132px; height: 38px; }
   .download-expand { width: 38px; height: 38px; flex-basis: 38px; }
 }
+
+
+/* Safety and transparency notices */
+.catalog-disclosure {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0 0 17px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.catalog-disclosure strong {
+  color: var(--text);
+  font-size: 13px;
+}
+.app-source {
+  margin: -5px 0 12px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.download-option {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.download-option-name {
+  color: inherit;
+}
+.download-option-host {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.3;
+}
