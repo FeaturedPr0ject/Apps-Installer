@@ -3,19 +3,22 @@
     "name": "Roblox",
     "image": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Roblox_Logo_2025.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail_unscaled&_=20250221235424",
     "download": "https://www.roblox.com/download/client?os=win&renderingPlatform=nextjs",
-    "about": "Roblox is the ultimate virtual universe that lets you create, share experiences with friends, and be anything you can imagine. Join millions of people and discover an infinite variety of immersive worlds created by a global community!"
+    "about": "Roblox is the ultimate virtual universe that lets you create, share experiences with friends, and be anything you can imagine. Join millions of people and discover an infinite variety of immersive worlds created by a global community!",
+    "category": "windows-package"
   },
   {
     "name": "Roblox - VNG",
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Roblox_VNG_Icon_2025.png/960px-Roblox_VNG_Icon_2025.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail%20640w",
     "download": "https://setup.rbxcdn.com/vng/version-5cf2272675e145f5-RobloxPlayerInstaller.exe",
-    "about": "Play millions of experiences."
+    "about": "Play millions of experiences.",
+    "category": "windows-package"
   },
   {
     "name": "Free Fire x MAX (PC Only)",
     "image": "https://play-lh.googleusercontent.com/M_l-dWl4q9FLX3IgYu8lrSPAs6WrMiL2gPxzYwehWAsfFpOVOSG-APyLkUkJn8Og_uHXw_qv5K351Dyy4pmqoQ=s96-rw",
     "download": "https://dl.google.com/tag/s/CiZ7NDdCMDdENzEtNTA1RC00NjY1LUFGRDQtNDk3MkEzMEM2NTMwfRIEYmV0YRpUClIIARIcb3JnYW5pYy1hcHBzLWRldGFpbHMtd2luZG93cyIWdXRtX3NvdXJjZT1jaGF0Z3B0LmNvbSim0dQJMhNjb20uZHRzLmZyZWVmaXJlbWF4KisI7gsSJnszNjM1MTBkZS1iMjY0LTRmMzEtOTUyOC0xZmM5NWJkM2QyNWR9MtICChZGcmVlIEZpcmUgTUFYIHggTkFSVVRPEl4KXGh0dHBzOi8vd3d3LmdzdGF0aWMuY29tL3BsYXkvZ2FtZXMvZ3BnZmUvZ2FtZWNhcmRzdjIvY29tLmR0cy5mcmVlZmlyZW1heF9jYXJkX2JhY2tncm91bmQucG5nGn4KfGh0dHBzOi8vcGxheS1saC5nb29nbGV1c2VyY29udGVudC5jb20vTV9sLWRXbDRxOUZMWDNJZ1l1OGxyU1BBczZXck1pTDJnUHh6WXdlaFdBc2ZGcE9WT1NHLUFQeUxrVWtKbjhPZ191SFh3X3F2NUszNTFEeXk0cG1xb1EiWApWaHR0cHM6Ly93d3cuZ3N0YXRpYy5jb20vcGxheS9nYW1lcy9ncGdmZS9nYW1lY2FyZHN2Mi9jb20uZHRzLmZyZWVmaXJlbWF4X2NhcmRfbG9nby5wbmc6hwNnb29nbGVwbGF5Z2FtZXM6Ly9kZWVwbGluay9kZXRhaWxzP2lkPWNvbS5kdHMuZnJlZWZpcmVtYXgmZWlwPUNwTUJDaE5qYjIwdVpIUnpMbVp5WldWbWFYSmxiV0Y0RW53U2VncGVhSFIwY0hNNkx5OXdiR0Y1TG1kdmIyZHNaUzVqYjIwdmMzUnZjbVV2WVhCd2N5OWtaWFJoYVd4elAybGtQV052YlM1a2RITXVabkpsWldacGNtVnRZWGdtWjJ3OVZrNG1kWFJ0WDNOdmRYSmpaVDFqYUdGMFozQjBMbU52YlJJV2RYUnRYM052ZFhKalpUMWphR0YwWjNCMExtTnZiUm9BRWh4QlYweFFhR1l4WjFka1lXcEtRazFMZFMxTGFHcGphSGh0WjBoR0dQM2N1T0dZTkElM0QlM0QmcGNhbXBhaWduaWQ9b3JnYW5pYy1hcHBzLWRldGFpbHMtd2luZG93cyZzb3VyY2UtcGF0aD0vc3RvcmUvYXBwcy9kZXRhaWxzSgJ2aVIEYnBoZQ/play/games/install/Install-Free%20Fire%20MAX%20x%20NARUTO-GooglePlayGames.exe",
-    "about": "Survive of The Wars. Gets Ranking. (*Require Google Account for playing games.)"
+    "about": "Survive of The Wars. Gets Ranking. (*Require Google Account for playing games.)",
+    "category": "windows-package"
   },
   {
     "name": "ChatGPT",
@@ -27,18 +30,21 @@
         "name": "ChatGPT Classic",
         "url": "https://get.microsoft.com/installer/download/9NT1R1C2HH7J?cid=website_cta_psi"
       }
-    ]
+    ],
+    "category": "windows-package"
   },
   {
     "name": "Proton VPN",
     "image": "https://protonvpn.com/favicons/android-chrome-192x192.png",
     "download": "https://protonvpn.com/download/ProtonVPN_v5.1.8_x64.exe",
-    "about": "The Proton VPN app for Windows is the best way to ensure safety and privacy while browsing the internet. It is open-source, easy to use, and packed with useful security features."
+    "about": "The Proton VPN app for Windows is the best way to ensure safety and privacy while browsing the internet. It is open-source, easy to use, and packed with useful security features.",
+    "category": "windows-package"
   },
   {
     "name": "PSTools",
     "image": "https://learn.microsoft.com/en-us/sysinternals/downloads/media/shared/download_sm.png",
     "download": "https://download.sysinternals.com/files/PSTools.zip",
-    "about": "Utilities like Telnet and remote control programs like Symantec's PC Anywhere let you execute programs on remote systems, but they can be a pain to set up and require that you install client software on the remote systems that you wish to access. "
+    "about": "Utilities like Telnet and remote control programs like Symantec's PC Anywhere let you execute programs on remote systems, but they can be a pain to set up and require that you install client software on the remote systems that you wish to access. ",
+    "category": "system-package"
   }
 ]
