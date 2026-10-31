@@ -97,3 +97,13 @@ The Windows XP-style advertising popup has been removed from the page and its Ja
 On first visit, the site displays a responsibility and download notice. Visitors must select **I Understand** to continue. The acknowledgement is stored in local browser storage for this notice version; the footer link allows the notice to be opened again. Updating `NOTICE_VERSION` in `responsibility.js` makes the notice appear again.
 
 The notice describes the site's catalog-maintenance responsibilities and asks visitors to verify external download destinations, publishers, signatures, compatibility, and files before use. It is an informational acknowledgement, not a blanket waiver of legal responsibility.
+
+
+## App categories
+
+The header contains three category filters:
+- `Apps`: shows every catalog entry.
+- `Windows Package`: shows apps marked with `"category": "windows-package"`.
+- `System Package`: shows utilities marked with `"category": "system-package"`.
+
+Add a `category` property to each entry in `apps.json` when creating new listings. The category filters combine with the search field.
