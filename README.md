@@ -90,3 +90,10 @@ Apps Installer is an independent catalog and is not affiliated with the develope
 ## Safe Browsing review
 
 The Windows XP-style advertising popup has been removed from the page and its JavaScript and CSS assets have been deleted while the site is reviewed. The disabled `ad.json` is retained as configuration data only and is not loaded by the page. Re-enable advertising only after ensuring the content and destination are clearly labeled and not likely to be mistaken for system, browser, or publisher UI.
+
+
+## Responsibility notice
+
+On first visit, the site displays a responsibility and download notice. Visitors must select **I Understand** to continue. The acknowledgement is stored in local browser storage for this notice version; the footer link allows the notice to be opened again. Updating `NOTICE_VERSION` in `responsibility.js` makes the notice appear again.
+
+The notice describes the site's catalog-maintenance responsibilities and asks visitors to verify external download destinations, publishers, signatures, compatibility, and files before use. It is an informational acknowledgement, not a blanket waiver of legal responsibility.
