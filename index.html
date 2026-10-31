@@ -36,13 +36,13 @@
   </div>
   <div class="package-nav-wrap">
     <nav class="package-nav" aria-label="App categories">
-      <button class="package-tab active" type="button" data-category="all" aria-pressed="true">Apps</button>
+      <button class="package-tab active" type="button" data-category="all" aria-pressed="true">All</button>
       <button class="package-tab" type="button" data-category="windows-package" aria-pressed="false">Windows Package</button>
       <button class="package-tab" type="button" data-category="system-package" aria-pressed="false">System Package</button>
     </nav>
   </div>
 </header>
-<main><div class="heading"><h1 id="category-title">Apps</h1><div class="count" id="count">0 apps</div></div>
+<main><div class="heading"><h1 id="category-title">All</h1><div class="count" id="count">0 apps</div></div>
 <aside class="catalog-disclosure" role="note">
   <strong>Independent app catalog</strong>
   <span>Apps Installer is not affiliated with the developers or publishers of the listed apps. Download buttons open external websites; files are not hosted, modified, or installed by this site. Check the destination domain and software publisher before downloading or running any file.</span>
@@ -240,7 +240,7 @@ function applyFilters() {
     return categoryMatch && searchMatch;
   });
   categoryTitle.textContent = activeCategory === "all"
-    ? "Apps"
+    ? "All"
     : activeCategory === "windows-package" ? "Windows Package" : "System Package";
   render(filtered);
 }
