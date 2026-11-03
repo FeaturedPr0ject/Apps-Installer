@@ -107,3 +107,10 @@ The header contains three category filters:
 - `System Package`: shows utilities marked with `"category": "system-package"`.
 
 Add a `category` property to each entry in `apps.json` when creating new listings. The category filters combine with the search field.
+
+
+## Roblox direct installer
+
+The Roblox primary Download button points directly to the Roblox-owned CDN bootstrapper at `https://setup.rbxcdn.com/RobloxPlayerInstaller.exe`. The extra download menu also offers the current Roblox - Windows Microsoft Store listing and the Roblox website installer as alternatives.
+
+The direct bootstrapper avoids opening the Roblox website just to obtain the installer. It is not a complete offline installer: Roblox still needs network access to its own services and CDN for installation, updates, sign-in and gameplay. If a network blocks Roblox CDN or game services as well, the direct installer cannot bypass that network restriction.
