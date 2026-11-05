@@ -111,6 +111,53 @@
     });
   }
 
+  function showWhiteoutAndReload(overlay) {
+    overlay.classList.remove("has-jumpscare");
+    overlay.classList.add("is-whiteout");
+    resetCount();
+    window.setTimeout(() => window.location.reload(), 2000);
+  }
+
+  function showRandomEntityJumpscare(overlay) {
+    const entities = [
+      {
+        id: "G-26",
+        tint: "#E8F1ED",
+        background: "#020303",
+        image: "https://static.wikia.nocookie.net/rooms-low-detailed/images/6/6c/JumpscareG26.gif",
+        fallback: "https://static.wikia.nocookie.net/rooms-low-detailed/images/6/6c/JumpscareG26.gif/revision/latest/scale-to-width-down/120?cb=20230731164709"
+      }
+    ];
+
+    const entity = entities[Math.floor(Math.random() * entities.length)];
+    overlay.dataset.entity = entity.id;
+    overlay.style.setProperty("--entity-tint", entity.tint);
+    overlay.style.setProperty("--entity-background", entity.background);
+    overlay.classList.add("has-jumpscare");
+
+    const image = document.createElement("img");
+    image.className = "egg-entity-image";
+    image.alt = entity.id + " jumpscare";
+    image.decoding = "async";
+    image.draggable = false;
+    image.src = entity.image;
+    image.dataset.fallbackUsed = "false";
+    image.addEventListener("error", () => {
+      if (image.dataset.fallbackUsed === "false") {
+        image.dataset.fallbackUsed = "true";
+        image.src = entity.fallback;
+        return;
+      }
+      image.remove();
+      overlay.classList.add("entity-image-unavailable");
+    });
+
+    overlay.querySelector(".egg-message")?.remove();
+    overlay.append(image);
+
+    window.setTimeout(() => showWhiteoutAndReload(overlay), 1800);
+  }
+
   function createFinalOverlay() {
     const overlay = document.createElement("div");
     overlay.id = "apps-easter-egg-overlay";
@@ -134,11 +181,7 @@
 
     function typeNextCharacter() {
       if (index >= characters.length) {
-        window.setTimeout(() => {
-          overlay.classList.add("is-whiteout");
-          resetCount();
-          window.setTimeout(() => window.location.reload(), 2000);
-        }, 1000);
+        window.setTimeout(() => showRandomEntityJumpscare(overlay), 180);
         return;
       }
 
@@ -150,7 +193,6 @@
 
     typeNextCharacter();
   }
-
   function finishEasterEgg() {
     if (isFinishing) return;
     isFinishing = true;
