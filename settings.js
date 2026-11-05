@@ -86,6 +86,7 @@
 
   function closeSettings(restore = true) {
     if (restore) applySettings(savedSettings);
+    window.APP_LANG?.closeLanguageSettingMenu?.();
     setAccentMenu(false);
     modal.hidden = true;
     document.body.style.overflow = "";
