@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs>
+  <radialGradient id="bg"><stop stop-color="#003e4c"/><stop offset=".56" stop-color="#00141a"/><stop offset="1" stop-color="#000"/></radialGradient>
+  <radialGradient id="cyan"><stop stop-color="#e3ffff"/><stop offset=".24" stop-color="#61faff"/><stop offset=".64" stop-color="#00a8d5"/><stop offset="1" stop-color="#00485b"/></radialGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="30" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="warp"><feTurbulence baseFrequency=".018 .11" numOctaves="2" seed="60"/><feDisplacementMap in="SourceGraphic" scale="37"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<g filter="url(#glow)" opacity=".45" fill="#00eaff"><path d="M370 455Q330 150 800 72Q1250 120 1230 455Q1250 800 800 835Q360 800 370 455Z"/></g>
+<g filter="url(#warp)">
+  <path fill="url(#cyan)" stroke="#a5ffff" stroke-width="12" d="M390 450Q330 170 560 110Q700 42 820 108Q1000 35 1160 185Q1300 355 1210 620Q1110 830 800 820Q475 845 390 600Z"/>
+  <path fill="#00131a" stroke="#9affff" stroke-width="9" d="M500 300q55-155 170-105q95 40 55 165q-32 105-135 100q-120-12-90-160Z"/>
+  <path fill="#00131a" stroke="#9affff" stroke-width="9" d="M865 295q68-150 175-95q95 45 42 180q-38 96-140 85q-111-18-77-170Z"/>
+  <path fill="#001019" d="M560 565Q800 470 1060 555Q1120 730 820 770Q580 740 560 565Z"/>
+  <path fill="none" stroke="#bdffff" stroke-width="18" d="M570 572Q805 492 1050 565"/>
+  <g fill="#f0ffff">
+    <path d="M610 561l30-3 10 60-30 4Z"/><path d="M670 544l30-5 8 65-30 5Z"/><path d="M730 535l30-3 4 69-30 2Z"/><path d="M790 533l30 0-1 72h-30Z"/><path d="M850 538l30 4-8 68-30-4Z"/><path d="M910 548l29 7-15 62-29-7Z"/><path d="M970 563l27 10-22 58-27-10Z"/>
+  </g>
+  <path fill="none" stroke="#e6ffff" stroke-width="18" stroke-linecap="round" d="M450 350q-95-130-35-205m-10 255q-110-70-160-10m905-40q90-130 30-205m45 260q110-75 155-10"/>
+  <path fill="none" stroke="#00677c" stroke-width="20" d="M510 475q-90 70-20 130m600-130q90 70 20 130"/>
+</g>
+<g fill="none" stroke="#7dfaff" stroke-width="4" opacity=".7"><path d="M70 150h250l-110 80H0m1400 570h200M0 720h210l100-65m1160-490-90 90" stroke-dasharray="12 18"/></g>
+<rect width="1600" height="900" fill="none" stroke="#39f9ff" stroke-opacity=".42" stroke-width="16"/>
+</svg>
