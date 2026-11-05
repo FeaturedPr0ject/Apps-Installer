@@ -40,14 +40,6 @@
     "about_vi": "Một trình khởi chạy Minecraft mã nguồn mở với khả năng quản lý nhiều phiên bản, tài khoản và bản mod. Tập trung vào quyền tự do của người dùng và khả năng tự do phân phối lại."
   },
   {
-    "name": "Roblox - VNG",
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Roblox_VNG_Icon_2025.png/960px-Roblox_VNG_Icon_2025.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail%20640w",
-    "download": "https://setup.rbxcdn.com/vng/version-5cf2272675e145f5-RobloxPlayerInstaller.exe",
-    "about": "Play millions of experiences.",
-    "category": "windows-package",
-    "about_vi": "Chơi hàng triệu trải nghiệm."
-  },
-  {
     "name": "ChatGPT",
     "image": "https://images.seeklogo.com/logo-png/46/1/chatgpt-logo-png_seeklogo-465219.png",
     "about": "Safety starts with understanding how developers collect and share your data. Data privacy and security practices may vary based on your use, region and age. The developer provided this information and may update it over time.",
