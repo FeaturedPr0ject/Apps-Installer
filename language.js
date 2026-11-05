@@ -1,5 +1,6 @@
 (() => {
   const STORAGE_KEY = "apps_installer_language";
+  const PROMPT_SEEN_KEY = "apps_installer_language_prompt_seen_v1";
   const dictionaries = {
     en: {
       search: "Search apps...",
@@ -165,6 +166,9 @@
   const modal = document.getElementById("language-modal");
   const responsibilityOverlay = document.getElementById("responsibility-overlay");
   const languageSetting = document.getElementById("language-setting");
+  const languageSettingPicker = document.getElementById("language-setting-picker");
+  const languageSettingMenu = document.getElementById("language-setting-menu");
+  const languageSettingCurrent = document.getElementById("language-setting-current");
   const continueButton = document.getElementById("language-continue");
 
   function readSavedLanguage() {
@@ -302,7 +306,14 @@
     setText(".language-choice[data-language-choice='vi'] .language-choice-copy small", "vietnameseSubtitle");
     setText(".language-choice[data-language-choice='en'] .language-choice-copy small", "englishSubtitle");
 
-    if (languageSetting) languageSetting.value = currentLanguage;
+    if (languageSetting && languageSettingCurrent) {
+      languageSettingCurrent.textContent = currentLanguage === "vi" ? "Tiếng Việt" : "English";
+      languageSetting.setAttribute("aria-expanded", "false");
+    }
+    document.querySelectorAll("[data-language-setting-value]").forEach(option => {
+      option.setAttribute("aria-selected", String(option.dataset.languageSettingValue === currentLanguage));
+    });
+    if (languageSettingMenu) languageSettingMenu.setAttribute("aria-label", dict.language);
     document.title = currentLanguage === "vi" ? "Apps Installer – Khám phá ứng dụng" : "Apps Installer – Discover Applications";
   }
 
@@ -321,8 +332,13 @@
     });
   }
 
+  function hasSeenLanguagePrompt() {
+    try { return localStorage.getItem(PROMPT_SEEN_KEY) === "1"; }
+    catch { return false; }
+  }
+
   function openLanguagePicker() {
-    if (!modal || !modal.hidden) return;
+    if (!modal || !modal.hidden || hasSeenLanguagePrompt()) return;
     draftLanguage = currentLanguage;
     updateChoiceButtons();
     returnOverflow = document.body.style.overflow;
@@ -334,6 +350,7 @@
   function closeLanguagePicker() {
     if (!modal) return;
     setLanguage(draftLanguage);
+    try { localStorage.setItem(PROMPT_SEEN_KEY, "1"); } catch {}
     modal.hidden = true;
     document.body.style.overflow = returnOverflow;
   }
@@ -363,14 +380,44 @@
     });
   }
 
-  languageSetting?.addEventListener("change", () => setLanguage(languageSetting.value));
+  function setLanguageSettingMenu(open) {
+    if (!languageSettingMenu || !languageSetting) return;
+    languageSettingMenu.hidden = !open;
+    languageSetting.setAttribute("aria-expanded", String(open));
+  }
+
+  languageSetting?.addEventListener("click", () => {
+    setLanguageSettingMenu(languageSettingMenu.hidden);
+  });
+
+  languageSettingMenu?.querySelectorAll("[data-language-setting-value]").forEach(option => {
+    option.addEventListener("click", () => {
+      setLanguage(option.dataset.languageSettingValue);
+      setLanguageSettingMenu(false);
+      languageSetting.focus();
+    });
+  });
+
+  document.addEventListener("click", event => {
+    if (languageSettingPicker && !languageSettingPicker.contains(event.target)) {
+      setLanguageSettingMenu(false);
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && languageSettingMenu && !languageSettingMenu.hidden) {
+      setLanguageSettingMenu(false);
+      languageSetting?.focus();
+    }
+  });
 
   window.APP_LANG = {
     get language() { return currentLanguage; },
     t,
     setLanguage,
     applyTranslations,
-    openLanguagePicker
+    openLanguagePicker,
+    closeLanguageSettingMenu: () => setLanguageSettingMenu(false)
   };
 
   applyTranslations();
