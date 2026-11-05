@@ -1370,3 +1370,47 @@ footer {
     transform: none !important;
   }
 }
+
+
+/* Stagger popup rows so opening and dismissing feels deliberate */
+.popup-floating.accent-menu .accent-choice,
+.popup-floating.language-setting-menu .language-setting-option,
+.popup-floating.download-menu .download-option,
+.popup-floating.category-menu .category-option {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition:
+    opacity 150ms ease,
+    transform 220ms cubic-bezier(.2,.8,.25,1),
+    background .15s,
+    color .15s,
+    border-color .15s;
+}
+.popup-floating[data-popup-open="true"].accent-menu .accent-choice,
+.popup-floating[data-popup-open="true"].language-setting-menu .language-setting-option,
+.popup-floating[data-popup-open="true"].download-menu .download-option,
+.popup-floating[data-popup-open="true"].category-menu .category-option {
+  opacity: 1;
+  transform: translateY(0);
+}
+.popup-floating[data-popup-open="true"] .accent-choice:nth-child(1),
+.popup-floating[data-popup-open="true"] .language-setting-option:nth-child(1),
+.popup-floating[data-popup-open="true"] .download-option:nth-child(1),
+.popup-floating[data-popup-open="true"] .category-option:nth-of-type(2) { transition-delay: 20ms; }
+.popup-floating[data-popup-open="true"] .accent-choice:nth-child(2),
+.popup-floating[data-popup-open="true"] .language-setting-option:nth-child(2),
+.popup-floating[data-popup-open="true"] .download-option:nth-child(2),
+.popup-floating[data-popup-open="true"] .category-option:nth-of-type(3) { transition-delay: 45ms; }
+.popup-floating[data-popup-open="true"] .accent-choice:nth-child(3),
+.popup-floating[data-popup-open="true"] .category-option:nth-of-type(4) { transition-delay: 70ms; }
+.popup-floating[data-popup-open="true"] .accent-choice:nth-child(4) { transition-delay: 95ms; }
+.popup-floating[data-popup-open="true"] .accent-choice:nth-child(5) { transition-delay: 120ms; }
+@media (prefers-reduced-motion: reduce) {
+  .popup-floating.accent-menu .accent-choice,
+  .popup-floating.language-setting-menu .language-setting-option,
+  .popup-floating.download-menu .download-option,
+  .popup-floating.category-menu .category-option {
+    transition: none !important;
+    transform: none !important;
+  }
+}
