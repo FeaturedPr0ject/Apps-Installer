@@ -129,7 +129,7 @@
   }
 
   function isOpen(menu) {
-    return Boolean(menu && records.has(menu) && menu.dataset.popupOpen === "true");
+    return Boolean(menu && records.has(menu) && ["preparing", "true"].includes(menu.dataset.popupOpen));
   }
 
   function reposition() {
