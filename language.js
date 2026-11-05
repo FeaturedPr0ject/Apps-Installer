@@ -461,7 +461,16 @@
   applyTranslations();
   window.addEventListener("apps-installer:responsibility-closed", openLanguagePicker);
 
-  if (!responsibilityOverlay || responsibilityOverlay.hidden) {
-    openLanguagePicker();
+  function onSecurityPassed() {
+    if (!responsibilityOverlay || responsibilityOverlay.hidden) openLanguagePicker();
+  }
+
+  window.addEventListener("apps-installer:security-passed", onSecurityPassed, { once: true });
+
+  if (
+    document.body.dataset.securityPassed === "true" &&
+    (!responsibilityOverlay || responsibilityOverlay.hidden)
+  ) {
+    onSecurityPassed();
   }
 })();
