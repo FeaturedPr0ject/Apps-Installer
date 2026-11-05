@@ -1040,12 +1040,6 @@ footer {
   scrollbar-color: color-mix(in srgb, var(--accent) 42%, var(--muted)) var(--surface);
   scrollbar-width: thin;
 }
-@media (prefers-reduced-motion: reduce) {
-  .app { animation: none !important; }
-  .accent-menu:not([hidden]),
-  .language-setting-menu:not([hidden]),
-  .download-menu:not([hidden]) { animation: none !important; }
-}
 
 
 /* Animated category picker: a real floating popup, not an inline expanding tab bar */
@@ -1266,14 +1260,6 @@ footer {
   .category-menu { left: 15px; }
   .category-trigger { min-height: 38px; min-width: 135px; font-size: 11px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .category-menu,
-  .category-option,
-  .category-trigger-chevron,
-  .category-option-icon,
-  .category-option-check { transition: none !important; }
-  #category-title.category-title-enter { animation: none !important; }
-}
 
 
 /* Click-triggered popup motion. The state changes only after a user action. */
@@ -1401,4 +1387,29 @@ footer {
 .language-setting-trigger,
 .download-expand {
   transition: transform 130ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+/* These short popup motions are intentionally retained even when OS-wide reduced motion is enabled. */
+@media (prefers-reduced-motion: reduce) {
+  .popup-floating[data-popup-open="true"] {
+    animation: popup-panel-enter 360ms cubic-bezier(.16, 1, .3, 1) both !important;
+    animation-duration: 360ms !important;
+  }
+  .popup-floating[data-popup-open="closing"] {
+    animation: popup-panel-exit 220ms cubic-bezier(.4, 0, 1, 1) both !important;
+    animation-duration: 220ms !important;
+  }
+  .popup-floating[data-popup-open="true"] .category-option,
+  .popup-floating[data-popup-open="true"] .accent-choice,
+  .popup-floating[data-popup-open="true"] .language-setting-option,
+  .popup-floating[data-popup-open="true"] .download-option {
+    animation: popup-item-enter 280ms cubic-bezier(.16, 1, .3, 1) both !important;
+    animation-duration: 280ms !important;
+  }
+  .popup-floating[data-popup-open="closing"] .category-option,
+  .popup-floating[data-popup-open="closing"] .accent-choice,
+  .popup-floating[data-popup-open="closing"] .language-setting-option,
+  .popup-floating[data-popup-open="closing"] .download-option {
+    animation: popup-item-exit 150ms ease-in both !important;
+    animation-duration: 150ms !important;
+  }
 }
