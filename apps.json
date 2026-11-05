@@ -62,5 +62,13 @@
     "about": "WSL is Microsoft's compatibility layer—now open source—that allows Linux binaries (CLI and GUI) to run natively on Windows without a VM. WSL 1 handles syscall translation; WSL 2 uses a lightweight VM with full Linux kernel, enabling full Linux compatibility, improved I/O, GPU acceleration, and support for distributions like Ubuntu, Debian, Kali, etc.",
     "category": "system-package",
     "about_vi": "WSL là một lớp tương thích của Microsoft—hiện đã trở thành mã nguồn mở—cho phép các tệp nhị phân Linux (cả dòng lệnh CLI và giao diện đồ họa GUI) chạy trực tiếp trên Windows mà không cần máy ảo (VM). WSL 1 thực hiện cơ chế chuyển đổi các lời gọi hệ thống (syscall); trong khi đó, WSL 2 sử dụng một máy ảo gọn nhẹ tích hợp nhân Linux hoàn chỉnh, mang lại khả năng tương thích toàn diện với Linux, cải thiện hiệu suất nhập/xuất (I/O), hỗ trợ tăng tốc bằng GPU, cũng như hỗ trợ các bản phân phối Linux như Ubuntu, Debian, Kali, v.v."
+  },
+  {
+    "name": "CrystalDiskInfo",
+    "image": "https://a.fsdn.com/allura/p/crystaldiskinfo/icon?bbb9abce3de6fe95e75443bda890cd32a552f2f11669c60090e21055c08694c7?&w=135",
+    "download": "https://onboardcloud.dl.sourceforge.net/project/crystaldiskinfo/9.9.4/CrystalDiskInfo9_9_4Shizuku.zip?viasf=1&fid=decadaa98aa3e580&e=1793950152&st=sGK1W2ZNa2qEVDj1arnW3A",
+    "about": "HDD/SSD utility software which supports a part of USB, RAID and NVMe.",
+    "category": "system-package",
+    "about_vi": "Phần mềm tiện ích cho HDD/SSD, có hỗ trợ một số thiết bị USB, RAID và NVMe."
   }
 ]
