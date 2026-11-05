@@ -49,5 +49,12 @@
     }
   });
 
-  if (!hasAcknowledged()) openNotice();
+  function onSecurityPassed() {
+    document.body.dataset.securityPassed = "true";
+    if (!hasAcknowledged()) openNotice();
+  }
+
+  window.addEventListener("apps-installer:security-passed", onSecurityPassed, { once: true });
+
+  if (document.body.dataset.securityPassed === "true") onSecurityPassed();
 })();
