@@ -36,7 +36,7 @@
 <header class="site-header">
   <div class="top">
     <a class="brand" href="./" aria-label="Apps Installer home">
-      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="brandMarkGradient" x1="9" y1="9" x2="30" y2="31" gradientUnits="userSpaceOnUse"><stop stop-color="#68B1FF"/><stop offset="1" stop-color="#3478F6"/></linearGradient></defs><rect x="2" y="2" width="36" height="36" rx="12" fill="#142944"/><path d="M9.7 28.5 17.6 12.6c.9-1.8 3.8-1.8 4.7 0l8 15.9h-5.6l-2-4.2h-5.6l-2.1 4.2H9.7Z" fill="url(#brandMarkGradient)"/><path d="M16.8 21.5h7.1" stroke="#142944" stroke-width="2.8" stroke-linecap="round"/></svg></span>
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="brandMarkGradient" x1="9" y1="9" x2="30" y2="31" gradientUnits="userSpaceOnUse"><stop stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent)"/></linearGradient></defs><rect x="2" y="2" width="36" height="36" rx="12" fill="#142944"/><path d="M9.7 28.5 17.6 12.6c.9-1.8 3.8-1.8 4.7 0l8 15.9h-5.6l-2-4.2h-5.6l-2.1 4.2H9.7Z" fill="url(#brandMarkGradient)"/><path d="M16.8 21.5h7.1" stroke="#142944" stroke-width="2.8" stroke-linecap="round"/></svg></span>
       <span class="brand-name">Apps<span>Installer</span></span>
     </a>
     <label class="search">
@@ -67,7 +67,7 @@
   <div class="hero-art" aria-hidden="true">
     <div class="hero-art-glow"></div>
     <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
-    <div class="hero-tile tile-main"><svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="heroMarkGradient" x1="15" y1="13" x2="49" y2="51" gradientUnits="userSpaceOnUse"><stop stop-color="#68B1FF"/><stop offset="1" stop-color="#3478F6"/></linearGradient></defs><rect x="7" y="7" width="50" height="50" rx="16" fill="#142944"/><path d="M15 46 26.7 20.8c1.3-2.7 5.3-2.7 6.6 0L45 46h-8.1l-3-6.2H26l-3 6.2h-8Z" fill="url(#heroMarkGradient)"/><path d="M25.3 35h13.4" stroke="#142944" stroke-width="4" stroke-linecap="round"/></svg></div>
+    <div class="hero-tile tile-main"><svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="heroMarkGradient" x1="15" y1="13" x2="49" y2="51" gradientUnits="userSpaceOnUse"><stop stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent)"/></linearGradient></defs><rect x="7" y="7" width="50" height="50" rx="16" fill="#142944"/><path d="M15 46 26.7 20.8c1.3-2.7 5.3-2.7 6.6 0L45 46h-8.1l-3-6.2H26l-3 6.2h-8Z" fill="url(#heroMarkGradient)"/><path d="M25.3 35h13.4" stroke="#142944" stroke-width="4" stroke-linecap="round"/></svg></div>
     <div class="hero-tile tile-small tile-left"><svg viewBox="0 0 24 24"><path d="M3 5.2 10.5 4v7H3V5.2Zm9-1.4L21 2.4V11h-9V3.8ZM3 13h7.5v7L3 18.8V13Zm9 0h9v8.6L12 20.2V13Z"/></svg></div>
     <div class="hero-tile tile-small tile-right"><svg viewBox="0 0 24 24"><path d="m12 3 8 4.2v9.6L12 21l-8-4.2V7.2L12 3Z"/><path d="m8.5 12 2.2 2.2 4.8-4.8"/></svg></div>
     <div class="hero-spark spark-one"></div><div class="hero-spark spark-two"></div>
@@ -360,11 +360,17 @@ init();
     </div>
 
     <div class="setting-group language-setting-group">
-      <label class="setting-label" for="language-setting" id="language-setting-label">Language</label>
-      <select class="language-setting-select" id="language-setting">
-        <option value="en">English</option>
-        <option value="vi">Tiếng Việt</option>
-      </select>
+      <span class="setting-label" id="language-setting-label">Language</span>
+      <div class="language-setting-picker" id="language-setting-picker">
+        <button class="language-setting-trigger" id="language-setting" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="language-setting-menu">
+          <span id="language-setting-current">Tiếng Việt</span>
+          <svg class="language-setting-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="language-setting-menu" id="language-setting-menu" role="listbox" aria-label="Language" hidden>
+          <button class="language-setting-option" type="button" role="option" data-language-setting-value="en" aria-selected="false">English<span class="language-setting-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4.2 4.2L19 6.5"/></svg></span></button>
+          <button class="language-setting-option" type="button" role="option" data-language-setting-value="vi" aria-selected="true">Tiếng Việt<span class="language-setting-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4.2 4.2L19 6.5"/></svg></span></button>
+        </div>
+      </div>
     </div>
 
     <p class="settings-note">Your appearance choices are stored in a first-party browser cookie only after you allow preference cookies. Choose “Only necessary” to keep the default appearance without saving these preferences.</p>
