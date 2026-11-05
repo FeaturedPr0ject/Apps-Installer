@@ -225,6 +225,13 @@
     setText(".hero-content > p", "heroDescription");
     setTextNode(".hero-tags span:first-child", "curated");
     setTextNode(".hero-tags span:last-child", "transparent");
+    const loadingState = document.querySelector("#apps .empty");
+    if (loadingState) {
+      const loadingTitle = loadingState.querySelector("strong");
+      if (loadingTitle) loadingTitle.textContent = dict.loading;
+      const loadingText = [...loadingState.childNodes].find(node => node.nodeType === Node.TEXT_NODE);
+      if (loadingText) loadingText.nodeValue = dict.pleaseWait;
+    }
     setText(".section-eyebrow", "browse");
     setText("#category-title", "all");
     setText(".disclosure-copy > strong", "disclosureTitle");
