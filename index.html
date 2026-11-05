@@ -91,6 +91,10 @@ const categoryButtons = [...document.querySelectorAll("[data-category]")];
 let activeCategory = "all";
 let apps = [];
 
+function t(key, fallback) {
+  return window.APP_LANG ? window.APP_LANG.t(key) : fallback;
+}
+
 function safeHttpUrl(value) {
   try {
     const url = new URL(value, window.location.href);
@@ -143,13 +147,13 @@ function getGameDownloadOptions(app) {
 }
 function render(items) {
   list.replaceChildren();
-  count.textContent = items.length + (items.length === 1 ? " app" : " apps");
+  count.textContent = items.length + " " + t(items.length === 1 ? "oneApp" : "manyApps", items.length === 1 ? "app" : "apps");
   if (!items.length) {
     const empty = document.createElement("div");
     empty.className = "empty";
     const title = document.createElement("strong");
-    title.textContent = apps.length ? "No matching apps" : "No apps yet";
-    empty.append(title, document.createTextNode(apps.length ? "Try another search." : "New apps will appear here soon."));
+    title.textContent = apps.length ? t("noMatchingApps", "No matching apps") : t("noApps", "No apps yet");
+    empty.append(title, document.createTextNode(apps.length ? t("tryAnotherSearch", "Try another search.") : t("newApps", "New apps will appear here soon.")));
     list.append(empty);
     return;
   }
@@ -168,7 +172,7 @@ function render(items) {
     name.textContent = app.name;
     const category = document.createElement("span");
     category.className = "app-category";
-    category.textContent = app.category === "system-package" ? "System Package" : "Windows Package";
+    category.textContent = t(app.category === "system-package" ? "systemPackage" : "windowsPackage", app.category === "system-package" ? "System Package" : "Windows Package");
     const about = document.createElement("p");
     about.className = "app-about";
     about.textContent = app.about;
@@ -180,7 +184,7 @@ function render(items) {
     sourceIcon.setAttribute("aria-hidden", "true");
     sourceIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M14 4h6v6m-9 5 9-9"/><path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>';
     const sourceLabel = document.createElement("span");
-    sourceLabel.textContent = primaryHost ? "External destination · " + primaryHost : "External download destination";
+    sourceLabel.textContent = (primaryHost ? t("externalDestination", "External destination") : t("externalDestination", "External destination")) + (primaryHost ? " · " + primaryHost : "");
     source.append(sourceIcon, sourceLabel);
     const primaryUrl = safeHttpUrl(app.download);
     const extraOptions = getGameDownloadOptions(app);
@@ -189,7 +193,7 @@ function render(items) {
 
     const downloadMain = document.createElement("a");
     downloadMain.className = "download download-main";
-    downloadMain.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>Download</span>`;
+    downloadMain.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>${t("download", "Download")}</span>`;
     if (primaryUrl) {
       downloadMain.href = primaryUrl;
       downloadMain.target = "_blank";
@@ -206,7 +210,7 @@ function render(items) {
       const toggle = document.createElement("button");
       toggle.className = "download-expand";
       toggle.type = "button";
-      toggle.setAttribute("aria-label", "More download options for " + app.name);
+      toggle.setAttribute("aria-label", t("moreDownloads", "More download options for") + " " + app.name);
       toggle.setAttribute("aria-expanded", "false");
       toggle.setAttribute("aria-haspopup", "true");
       const chevron = document.createElement("span");
@@ -251,9 +255,9 @@ function render(items) {
 async function init() {
   try {
     const response = await fetch(CATALOG_URL, { cache: "no-store" });
-    if (!response.ok) throw new Error("Unable to load the app list (" + response.status + ")");
+    if (!response.ok) throw new Error(t("loadError", "Could not load app catalog") + " (" + response.status + ")");
     const data = await response.json();
-    if (!Array.isArray(data)) throw new Error("The app list has an invalid format");
+    if (!Array.isArray(data)) throw new Error(t("invalidCatalog", "The app list has an invalid format"));
     apps = data.filter(item =>
       item && typeof item.name === "string" &&
       typeof item.image === "string" &&
@@ -266,10 +270,10 @@ async function init() {
     const empty = document.createElement("div");
     empty.className = "empty";
     const title = document.createElement("strong");
-    title.textContent = "Could not load app catalog";
+    title.textContent = t("loadError", "Could not load app catalog");
     empty.append(title, document.createTextNode(error.message));
     list.append(empty);
-    count.textContent = "0 apps";
+    count.textContent = "0 " + t("manyApps", "apps");
   }
 }
 function applyFilters() {
@@ -279,9 +283,7 @@ function applyFilters() {
     const searchMatch = (app.name + " " + app.about).toLocaleLowerCase().includes(query);
     return categoryMatch && searchMatch;
   });
-  categoryTitle.textContent = activeCategory === "all"
-    ? "All"
-    : activeCategory === "windows-package" ? "Windows Package" : "System Package";
+  categoryTitle.textContent = t(activeCategory === "all" ? "all" : activeCategory === "windows-package" ? "windowsPackage" : "systemPackage", activeCategory === "all" ? "All" : activeCategory === "windows-package" ? "Windows Package" : "System Package");
   render(filtered);
 }
 
@@ -298,6 +300,7 @@ categoryButtons.forEach(button => {
 });
 
 search.addEventListener("input", applyFilters);
+window.addEventListener("apps-installer:language-changed", applyFilters);
 init();
 </script>
 
