@@ -1,7 +1,7 @@
 /* Brand colors stay independent from the user accent color */
 .brand-mark {
   color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 12%, #142944);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface-soft));
 }
 .brand-name span {
   color: var(--accent) !important;
@@ -59,15 +59,15 @@
   display: grid;
   place-items: center;
   margin-bottom: 19px;
-  border: 1px solid rgba(76,145,255,.2);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
   border-radius: 16px;
-  background: rgba(76,145,255,.11);
-  color: #4c91ff;
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 .language-emblem svg { width: 24px; height: 24px; }
 .language-eyebrow {
   margin: 0 0 8px;
-  color: #4c91ff;
+  color: var(--accent);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: .14em;
@@ -105,12 +105,12 @@
 }
 .language-choice:hover {
   transform: translateY(-1px);
-  border-color: color-mix(in srgb, #4c91ff 45%, var(--line));
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
 }
 .language-choice[aria-pressed="true"] {
-  border-color: #4c91ff;
-  background: rgba(76,145,255,.09);
-  box-shadow: inset 0 0 0 1px rgba(76,145,255,.12);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent);
 }
 .language-code {
   width: 41px;
@@ -119,8 +119,8 @@
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: #142944;
-  color: #68b1ff;
+  background: var(--surface-soft);
+  color: var(--accent);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .04em;
@@ -144,7 +144,7 @@
   flex: 0 0 18px;
   margin-left: auto;
   fill: none;
-  stroke: #4c91ff;
+  stroke: var(--accent);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -155,15 +155,15 @@
   width: 100%;
   min-height: 45px;
   margin-top: 19px;
-  border: 1px solid #3478f6;
+  border: 1px solid var(--accent);
   border-radius: 13px;
-  background: linear-gradient(110deg, #4c91ff, #3478f6);
+  background: linear-gradient(110deg, var(--accent), color-mix(in srgb, var(--accent) 78%, #111827));
   color: #fff;
   font: inherit;
   font-size: 12px;
   font-weight: 650;
   cursor: pointer;
-  box-shadow: 0 8px 19px rgba(52,120,246,.22);
+  box-shadow: 0 8px 19px color-mix(in srgb, var(--accent) 24%, transparent);
   transition: transform .16s, filter .16s;
 }
 .language-continue:hover {
@@ -172,7 +172,7 @@
 }
 .language-continue:active { transform: translateY(1px); }
 .language-choice:focus-visible, .language-continue:focus-visible {
-  outline: 3px solid rgba(76,145,255,.35);
+  outline: 3px solid color-mix(in srgb, var(--accent) 38%, transparent);
   outline-offset: 3px;
 }
 @media (max-width: 560px) {
