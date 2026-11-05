@@ -54,5 +54,13 @@
     "about": "Utilities like Telnet and remote control programs like Symantec's PC Anywhere let you execute programs on remote systems, but they can be a pain to set up and require that you install client software on the remote systems that you wish to access. ",
     "category": "system-package",
     "about_vi": "Các tiện ích như Telnet và chương trình điều khiển từ xa như Symantec PC Anywhere cho phép thực thi chương trình trên hệ thống từ xa. Tuy nhiên, việc thiết lập có thể phức tạp và yêu cầu cài phần mềm máy khách trên các hệ thống từ xa cần truy cập."
+  },
+  {
+    "name": "WSL - ARM64",
+    "image": "https://a.fsdn.com/allura/mirror/wsl/icon?06fa39301c97531152761a4d780a1fedcdaec6b55ff08f5327eba2ff19cdd9bb?&w=135",
+    "download": "https://zenlayer.dl.sourceforge.net/project/wsl.mirror/3.0.3/wsl.3.0.3.0.arm64.msi?viasf=1&fid=254257633cd9a7fb&e=1793949700&st=eAXcw3K-8Bsu8-sMcBvjMA",
+    "about": "WSL is Microsoft's compatibility layer—now open source—that allows Linux binaries (CLI and GUI) to run natively on Windows without a VM. WSL 1 handles syscall translation; WSL 2 uses a lightweight VM with full Linux kernel, enabling full Linux compatibility, improved I/O, GPU acceleration, and support for distributions like Ubuntu, Debian, Kali, etc.",
+    "category": "system-package",
+    "about_vi": "WSL là một lớp tương thích của Microsoft—hiện đã trở thành mã nguồn mở—cho phép các tệp nhị phân Linux (cả dòng lệnh CLI và giao diện đồ họa GUI) chạy trực tiếp trên Windows mà không cần máy ảo (VM). WSL 1 thực hiện cơ chế chuyển đổi các lời gọi hệ thống (syscall); trong khi đó, WSL 2 sử dụng một máy ảo gọn nhẹ tích hợp nhân Linux hoàn chỉnh, mang lại khả năng tương thích toàn diện với Linux, cải thiện hiệu suất nhập/xuất (I/O), hỗ trợ tăng tốc bằng GPU, cũng như hỗ trợ các bản phân phối Linux như Ubuntu, Debian, Kali, v.v."
   }
 ]
