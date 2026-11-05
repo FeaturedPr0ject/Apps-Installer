@@ -1,10 +1,10 @@
 /* Brand colors stay independent from the user accent color */
 .brand-mark {
-  color: #68b1ff;
-  background: #142944;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, #142944);
 }
 .brand-name span {
-  color: #4c91ff !important;
+  color: var(--accent) !important;
 }
 
 /* Language preference inside Appearance Settings */
