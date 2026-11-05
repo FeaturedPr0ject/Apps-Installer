@@ -45,12 +45,30 @@
     </label>
     <button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings"><svg class="settings-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h5m4 0h7M4 12h2m4 0h10M4 18h8m4 0h4"/><circle cx="11" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/></svg></button>
   </div>
-  <div class="package-nav-wrap">
-    <nav class="package-nav" aria-label="App categories" id="package-nav">
-      <button class="package-tab active" type="button" data-category="all" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.3"/><rect x="14" y="4" width="6" height="6" rx="1.3"/><rect x="4" y="14" width="6" height="6" rx="1.3"/><rect x="14" y="14" width="6" height="6" rx="1.3"/></svg>All</button>
-      <button class="package-tab" type="button" data-category="windows-package" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.2 10.5 4v7H3V5.2Zm9-1.4L21 2.4V11h-9V3.8ZM3 13h7.5v7L3 18.8V13Zm9 0h9v8.6L12 20.2V13Z"/></svg>Windows Package</button>
-      <button class="package-tab" type="button" data-category="system-package" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>System Package</button>
-    </nav>
+  <div class="package-nav-wrap" id="category-picker">
+    <button class="category-trigger" id="category-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="category-menu">
+      <svg class="category-trigger-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.3"/><rect x="14" y="4" width="6" height="6" rx="1.3"/><rect x="4" y="14" width="6" height="6" rx="1.3"/><rect x="14" y="14" width="6" height="6" rx="1.3"/></svg>
+      <span id="category-trigger-label">All</span>
+      <svg class="category-trigger-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="category-menu" id="category-menu" role="menu" aria-label="App categories" data-open="false" aria-hidden="true">
+      <p class="category-menu-heading" id="category-menu-heading">Browse categories</p>
+      <button class="category-option" type="button" role="menuitemradio" data-category="all" aria-checked="true">
+        <span class="category-option-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.3"/><rect x="14" y="4" width="6" height="6" rx="1.3"/><rect x="4" y="14" width="6" height="6" rx="1.3"/><rect x="14" y="14" width="6" height="6" rx="1.3"/></svg></span>
+        <span class="category-option-copy"><strong data-category-name="all">All</strong><small id="category-all-description">Show every app</small></span>
+        <svg class="category-option-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.2 4.2L19 6.5"/></svg>
+      </button>
+      <button class="category-option" type="button" role="menuitemradio" data-category="windows-package" aria-checked="false">
+        <span class="category-option-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.2 10.5 4v7H3V5.2Zm9-1.4L21 2.4V11h-9V3.8ZM3 13h7.5v7L3 18.8V13Zm9 0h9v8.6L12 20.2V13Z"/></svg></span>
+        <span class="category-option-copy"><strong data-category-name="windows-package">Windows Package</strong><small id="category-windows-description">Apps for Windows</small></span>
+        <svg class="category-option-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.2 4.2L19 6.5"/></svg>
+      </button>
+      <button class="category-option" type="button" role="menuitemradio" data-category="system-package" aria-checked="false">
+        <span class="category-option-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></span>
+        <span class="category-option-copy"><strong data-category-name="system-package">System Package</strong><small id="category-system-description">System utilities and tools</small></span>
+        <svg class="category-option-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.2 4.2L19 6.5"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 <main>
@@ -88,9 +106,30 @@ const list = document.getElementById("apps");
 const search = document.getElementById("search");
 const count = document.getElementById("count");
 const categoryTitle = document.getElementById("category-title");
-const categoryButtons = [...document.querySelectorAll("[data-category]")];
+const categoryButtons = [...document.querySelectorAll(".category-option[data-category]")];
+const categoryPicker = document.getElementById("category-picker");
+const categoryTrigger = document.getElementById("category-trigger");
+const categoryMenu = document.getElementById("category-menu");
+const categoryTriggerLabel = document.getElementById("category-trigger-label");
 let activeCategory = "all";
 let apps = [];
+
+function setCategoryMenu(open) {
+  if (!categoryMenu || !categoryTrigger) return;
+  categoryMenu.dataset.open = String(open);
+  categoryMenu.setAttribute("aria-hidden", String(!open));
+  categoryTrigger.setAttribute("aria-expanded", String(open));
+}
+
+function updateCategorySelection() {
+  categoryButtons.forEach(button => {
+    const selected = button.dataset.category === activeCategory;
+    button.setAttribute("aria-checked", String(selected));
+    button.classList.toggle("selected", selected);
+  });
+  const activeLabel = document.querySelector('[data-category-name="' + activeCategory + '"]');
+  if (activeLabel && categoryTriggerLabel) categoryTriggerLabel.textContent = activeLabel.textContent;
+}
 
 function t(key, fallback) {
   return window.APP_LANG ? window.APP_LANG.t(key) : fallback;
@@ -289,18 +328,32 @@ function applyFilters() {
   render(filtered);
 }
 
+categoryTrigger?.addEventListener("click", () => {
+  setCategoryMenu(categoryMenu.dataset.open !== "true");
+});
+
 categoryButtons.forEach(button => {
   button.addEventListener("click", () => {
     activeCategory = button.dataset.category;
-    categoryButtons.forEach(tab => {
-      const active = tab === button;
-      tab.classList.toggle("active", active);
-      tab.setAttribute("aria-pressed", String(active));
-    });
+    updateCategorySelection();
+    setCategoryMenu(false);
     applyFilters();
+    categoryTrigger?.focus();
   });
 });
 
+document.addEventListener("click", event => {
+  if (categoryPicker && !categoryPicker.contains(event.target)) setCategoryMenu(false);
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && categoryMenu?.dataset.open === "true") {
+    setCategoryMenu(false);
+    categoryTrigger?.focus();
+  }
+});
+
+updateCategorySelection();
 search.addEventListener("input", applyFilters);
 window.addEventListener("apps-installer:language-changed", applyFilters);
 init();
