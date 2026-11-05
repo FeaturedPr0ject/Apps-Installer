@@ -862,3 +862,187 @@ footer {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Unified popup menus and smooth catalog entry */
+.brand-mark {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, #142944);
+}
+.brand-name span { color: var(--accent) !important; }
+.hero h1 span {
+  background: linear-gradient(100deg, var(--accent), color-mix(in srgb, var(--accent) 60%, var(--text)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.accent-picker,
+.language-setting-picker {
+  position: relative;
+  width: 100%;
+}
+.accent-menu,
+.language-setting-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 140;
+  max-height: 230px;
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform-origin: top center;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--surface);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .24);
+}
+.accent-menu:not([hidden]),
+.language-setting-menu:not([hidden]),
+.download-menu:not([hidden]) {
+  animation: popup-list-in .18s cubic-bezier(.2,.75,.25,1) both;
+}
+.accent-menu { padding: 7px; }
+.language-setting-trigger {
+  width: 100%;
+  min-height: 47px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  font-size: 12px;
+  transition: border-color .16s, box-shadow .16s, background .16s;
+}
+.language-setting-trigger:hover,
+.language-setting-trigger[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
+}
+.language-setting-trigger[aria-expanded="true"] {
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.language-setting-chevron {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .18s;
+}
+.language-setting-trigger[aria-expanded="true"] .language-setting-chevron { transform: rotate(180deg); }
+.language-setting-menu {
+  display: grid;
+  gap: 3px;
+  padding: 7px;
+}
+.language-setting-menu[hidden],
+.accent-menu[hidden],
+.download-menu[hidden] { display: none !important; }
+.language-setting-option {
+  width: 100%;
+  min-height: 41px;
+  padding: 0 11px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color .14s, background .14s;
+}
+.language-setting-option:hover {
+  background: var(--surface-soft);
+  color: var(--accent);
+}
+.language-setting-option[aria-selected="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.language-setting-check {
+  display: inline-flex;
+  margin-left: auto;
+  opacity: 0;
+}
+.language-setting-check svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.language-setting-option[aria-selected="true"] .language-setting-check { opacity: 1; }
+.accent-choice { min-height: 41px; }
+.accent-choice[aria-selected="true"] { background: var(--accent-soft); }
+
+/* Per-card entrance animation after loading, searching, and filtering */
+.app {
+  animation: app-card-enter .42s cubic-bezier(.2,.75,.25,1) both;
+  animation-delay: calc(var(--item-index, 0) * 48ms);
+}
+@keyframes app-card-enter {
+  from { opacity: 0; transform: translateY(13px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes popup-list-in {
+  from { opacity: 0; transform: translateY(-7px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Slim, coordinated scrollbars across the page, dialogs, and popup lists */
+:root {
+  scrollbar-color: color-mix(in srgb, var(--accent) 42%, var(--muted)) var(--surface-soft);
+  scrollbar-width: thin;
+}
+* {
+  scrollbar-color: color-mix(in srgb, var(--accent) 42%, var(--muted)) var(--surface-soft);
+  scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: var(--surface-soft);
+}
+*::-webkit-scrollbar-thumb {
+  min-height: 34px;
+  border: 2px solid var(--surface-soft);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 40%, var(--muted));
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-corner { background: transparent; }
+.settings-dialog,
+.responsibility-dialog,
+.language-dialog {
+  scrollbar-color: color-mix(in srgb, var(--accent) 42%, var(--muted)) var(--surface);
+  scrollbar-width: thin;
+}
+@media (prefers-reduced-motion: reduce) {
+  .app { animation: none !important; }
+  .accent-menu:not([hidden]),
+  .language-setting-menu:not([hidden]),
+  .download-menu:not([hidden]) { animation: none !important; }
+}
