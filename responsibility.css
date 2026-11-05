@@ -49,13 +49,13 @@ body.responsibility-open { overflow: hidden; }
   margin-bottom: 5px;
   color: var(--accent);
   font-size: 9px;
-  font-weight: 850;
+  font-weight: 650;
   letter-spacing: .13em;
 }
 .responsibility-heading h2 {
   margin: 0;
   font-size: clamp(19px, 3vw, 25px);
-  font-weight: 850;
+  font-weight: 650;
   letter-spacing: -.65px;
   line-height: 1.22;
 }
@@ -73,7 +73,7 @@ body.responsibility-open { overflow: hidden; }
 .responsibility-section h3 {
   margin: 0 0 9px;
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 650;
 }
 .responsibility-section ul {
   margin: 0;
@@ -114,7 +114,7 @@ body.responsibility-open { overflow: hidden; }
   color: #fff;
   cursor: pointer;
   font-size: 12px;
-  font-weight: 850;
+  font-weight: 650;
   box-shadow: 0 7px 17px color-mix(in srgb, var(--accent) 22%, transparent);
   transition: filter .15s, transform .15s, box-shadow .15s;
 }
