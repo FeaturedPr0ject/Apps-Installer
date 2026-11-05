@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs>
+  <radialGradient id="bg"><stop stop-color="#142008"/><stop offset=".6" stop-color="#040702"/><stop offset="1" stop-color="#000"/></radialGradient>
+  <radialGradient id="green" cx=".52" cy=".34" r=".78"><stop stop-color="#d7ff55"/><stop offset=".38" stop-color="#78ba16"/><stop offset=".78" stop-color="#315b09"/><stop offset="1" stop-color="#101e04"/></radialGradient>
+  <filter id="warp"><feTurbulence type="fractalNoise" baseFrequency=".018 .08" numOctaves="2" seed="159"/><feDisplacementMap in="SourceGraphic" scale="27"/></filter>
+  <filter id="glow"><feGaussianBlur stdDeviation="24" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<g opacity=".25" fill="#a7ff28" filter="url(#glow)"><path d="M330 460Q300 100 800 60Q1300 105 1260 460Q1260 820 800 850Q340 810 330 460Z"/></g>
+<g filter="url(#warp)">
+  <path fill="url(#green)" stroke="#c6ff46" stroke-width="10" d="M380 460Q350 180 565 110Q700 45 820 90Q1040 50 1190 220Q1300 390 1210 625Q1110 845 800 824Q470 825 380 600Z"/>
+  <path fill="#081000" stroke="#b1ed35" stroke-width="11" d="M500 300Q548 174 670 186Q778 210 735 365Q710 470 595 466Q500 440 500 300Z"/>
+  <path fill="#081000" stroke="#b1ed35" stroke-width="11" d="M850 300Q890 172 1028 185Q1140 220 1095 365Q1065 475 950 463Q850 442 850 300Z"/>
+  <g fill="#b7f53b" stroke="#e7ff82" stroke-width="5">
+    <path d="M550 320l42-56 25 77-32 50Z"/><path d="M620 295l37-66 30 76-34 58Z"/>
+    <path d="M910 300l35-69 31 75-34 58Z"/><path d="M985 318l43-57 25 78-32 51Z"/>
+  </g>
+  <path fill="#061000" d="M540 565Q800 505 1065 563Q1110 670 980 740Q780 810 610 710Q525 655 540 565Z"/>
+  <path fill="none" stroke="#caff4e" stroke-width="17" stroke-linecap="round" d="M548 588Q800 535 1058 585"/>
+  <g stroke="#ddff8a" stroke-width="11" stroke-linecap="round"><path d="M570 558l-18 78m94-96-5 93m95-105v100m98-100 7 105m94-93 17 87m90-70 30 66"/></g>
+  <g fill="#f1ffb6"><path d="M620 588l35-2 0 60-35 0Z"/><path d="M690 574l35-3 3 68h-35Z"/><path d="M765 570h35v73h-35Z"/><path d="M842 572l35 4-5 67-35-3Z"/><path d="M918 580l34 8-12 64-33-7Z"/></g>
+  <path fill="none" stroke="#d7ff5a" stroke-width="16" stroke-linecap="round" d="M430 475q-80 20-90 100m825-115q80 15 112 94"/>
+</g>
+<g stroke="#9cdb28" opacity=".65" stroke-width="5" fill="none"><path d="M210 170l160 65m850 490 190 90M1300 160l-110 100M260 740l130-80" stroke-dasharray="6 20"/></g>
+<rect width="1600" height="900" fill="none" stroke="#9be22a" stroke-opacity=".22" stroke-width="15"/>
+</svg>
