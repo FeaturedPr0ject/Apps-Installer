@@ -137,7 +137,7 @@
         window.setTimeout(() => {
           overlay.classList.add("is-whiteout");
           resetCount();
-          window.setTimeout(() => window.location.reload(), 520);
+          window.setTimeout(() => window.location.reload(), 2000);
         }, 1000);
         return;
       }
