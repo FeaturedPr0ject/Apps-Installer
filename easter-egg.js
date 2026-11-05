@@ -120,36 +120,11 @@
 
   function showRandomEntityJumpscare(overlay) {
     const entities = [
-      {
-        id: "G-26",
-        tint: "#E8F1ED",
-        background: "#020303",
-        image: "./assets/entities/g-26.svg"
-      },
-      {
-        id: "G-159",
-        tint: "#9BE22A",
-        background: "#040702",
-        image: "./assets/entities/g-159.svg"
-      },
-      {
-        id: "A-60",
-        tint: "#DC0000",
-        background: "#100102",
-        image: "./assets/entities/a-60.svg"
-      },
-      {
-        id: "G-60",
-        tint: "#39F9FF",
-        background: "#00141A",
-        image: "./assets/entities/g-60.svg"
-      },
-      {
-        id: "G-55",
-        tint: "#C8C8C8",
-        background: "#050505",
-        image: "./assets/entities/g-55.svg"
-      }
+      { id: "G-26", tint: "#E8F1ED", background: "#020303", image: "./assets/entities/g-26.svg" },
+      { id: "G-159", tint: "#9BE22A", background: "#040702", image: "./assets/entities/g-159.svg" },
+      { id: "A-60", tint: "#DC0000", background: "#100102", image: "./assets/entities/a-60.svg" },
+      { id: "G-60", tint: "#39F9FF", background: "#00141A", image: "./assets/entities/g-60.svg" },
+      { id: "G-55", tint: "#C8C8C8", background: "#050505", image: "./assets/entities/g-55.svg" }
     ];
 
     let previousEntity = "";
@@ -162,23 +137,45 @@
     overlay.dataset.entity = entity.id;
     overlay.style.setProperty("--entity-tint", entity.tint);
     overlay.style.setProperty("--entity-background", entity.background);
-    overlay.classList.add("has-jumpscare");
-
-    const image = document.createElement("img");
-    image.className = "egg-entity-image";
-    image.alt = entity.id + " original fan-made jumpscare illustration";
-    image.decoding = "async";
-    image.draggable = false;
-    image.src = entity.image;
-    image.addEventListener("error", () => {
-      image.remove();
-      overlay.classList.add("entity-image-unavailable");
-    });
-
+    overlay.classList.add("is-jumpscare-pause");
     overlay.querySelector(".egg-message")?.remove();
-    overlay.append(image);
 
-    window.setTimeout(() => showWhiteoutAndReload(overlay), 1800);
+    window.setTimeout(() => {
+      const stage = document.createElement("div");
+      stage.className = "egg-jumpscare-stage";
+
+      const echoRed = document.createElement("img");
+      echoRed.className = "egg-entity-image egg-entity-echo egg-entity-echo-red";
+      echoRed.src = entity.image;
+      echoRed.alt = "";
+      echoRed.draggable = false;
+
+      const echoCyan = document.createElement("img");
+      echoCyan.className = "egg-entity-image egg-entity-echo egg-entity-echo-cyan";
+      echoCyan.src = entity.image;
+      echoCyan.alt = "";
+      echoCyan.draggable = false;
+
+      const image = document.createElement("img");
+      image.className = "egg-entity-image egg-entity-main";
+      image.alt = entity.id + " original fan-made jumpscare illustration";
+      image.decoding = "sync";
+      image.draggable = false;
+      image.src = entity.image;
+      image.addEventListener("error", () => {
+        stage.remove();
+        overlay.classList.remove("has-jumpscare");
+        overlay.classList.add("entity-image-unavailable");
+        showWhiteoutAndReload(overlay);
+      }, { once: true });
+
+      stage.append(echoRed, echoCyan, image);
+      overlay.append(stage);
+      overlay.classList.remove("is-jumpscare-pause");
+      overlay.classList.add("has-jumpscare");
+    }, 115);
+
+    window.setTimeout(() => showWhiteoutAndReload(overlay), 1950);
   }
   function createFinalOverlay() {
     const overlay = document.createElement("div");
