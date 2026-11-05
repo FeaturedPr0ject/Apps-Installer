@@ -114,3 +114,26 @@ Add a `category` property to each entry in `apps.json` when creating new listing
 The Roblox primary Download button points directly to the Roblox-owned CDN bootstrapper at `https://setup.rbxcdn.com/RobloxPlayerInstaller.exe`. The extra download menu also offers the current Roblox - Windows Microsoft Store listing and the Roblox website installer as alternatives.
 
 The direct bootstrapper avoids opening the Roblox website just to obtain the installer. It is not a complete offline installer: Roblox still needs network access to its own services and CDN for installation, updates, sign-in and gameplay. If a network blocks Roblox CDN or game services as well, the direct installer cannot bypass that network restriction.
+
+
+## First-entry bot verification
+
+The site includes an optional Cloudflare Turnstile Managed gate. It runs before the Responsibility Notice and language selector. The widget uses interaction-only appearance: normal visitors can pass without a visible checkbox, while visitors that Cloudflare considers higher risk may be asked to confirm they are human.
+
+To enable it:
+
+1. Create a Turnstile widget in the Cloudflare dashboard.
+2. Add apps-installer-site.vercel.app as an allowed hostname.
+3. Choose Managed mode for the widget.
+4. In Vercel → Project Settings → Environment Variables, add:
+   - TURNSTILE_SITE_KEY: the public site key.
+   - TURNSTILE_SECRET_KEY: the private secret key. Keep this server-side; never place it in HTML or JavaScript.
+   - TURNSTILE_SESSION_SECRET: optional, recommended random secret used to sign the verification session cookie. If omitted, the Turnstile secret is used.
+   - TURNSTILE_ALLOWED_HOSTNAMES: optional comma-separated list of allowed hostnames. It defaults to apps-installer-site.vercel.app.
+5. Redeploy the Production environment after adding or changing the variables.
+
+The Vercel Function at /api/turnstile validates tokens with Cloudflare Siteverify, checks the expected action and hostname, then issues a signed HttpOnly session cookie for six hours. The browser does not receive the secret key. The gate is fail-open only while the Turnstile keys are not configured; after it is enabled, verification failures block access and provide a retry action.
+
+Turnstile evaluates browser and request risk signals; it does not make a decision from IP address alone. Cloudflare may process technical browser and network signals for bot detection. See the Turnstile widget modes and server-side validation documentation:
+- https://developers.cloudflare.com/turnstile/concepts/widget/
+- https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
