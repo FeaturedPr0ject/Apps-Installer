@@ -176,7 +176,7 @@ function render(items) {
     category.textContent = t(app.category === "system-package" ? "systemPackage" : "windowsPackage", app.category === "system-package" ? "System Package" : "Windows Package");
     const about = document.createElement("p");
     about.className = "app-about";
-    about.textContent = app.about;
+    about.textContent = window.APP_LANG?.language === "vi" && app.about_vi ? app.about_vi : app.about;
     const source = document.createElement("p");
     source.className = "app-source";
     const primaryHost = getDownloadHost(app.download);
