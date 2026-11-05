@@ -77,6 +77,8 @@
     }
 
     const record = remember(menu);
+    const token = (menu._popupToken || 0) + 1;
+    menu._popupToken = token;
     record.anchor = anchor;
     menu.hidden = false;
     menu.classList.add("popup-floating");
@@ -90,7 +92,7 @@
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        if (!records.has(menu)) return;
+        if (!records.has(menu) || menu._popupToken !== token) return;
         menu.dataset.popupOpen = "true";
         menu.style.visibility = "visible";
       });
@@ -100,6 +102,7 @@
   function close(menu) {
     if (!menu || !records.has(menu)) return;
     const record = records.get(menu);
+    menu._popupToken = (menu._popupToken || 0) + 1;
     menu.dataset.popupOpen = "false";
     menu.style.visibility = "visible";
     const oldTimer = closingTimers.get(menu);
