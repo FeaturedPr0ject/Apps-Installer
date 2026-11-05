@@ -24,6 +24,10 @@
   "url": "https://apps-installer-site.vercel.app/"
 }
 </script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css">
 <link rel="stylesheet" href="./responsibility.css">
 </head>
@@ -31,14 +35,14 @@
 <header class="site-header">
   <div class="top">
     <a class="brand" href="./" aria-label="Apps Installer home">
-      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><rect x="2" y="2" width="36" height="36" rx="12" fill="currentColor" opacity=".12"/><path d="M11 27.5 18.4 12h3.2L29 27.5h-4l-1.6-3.6h-7l-1.6 3.6H11Z" fill="currentColor"/><path d="M17.8 20.8h4.4" stroke="var(--surface)" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><defs><linearGradient id="brandMarkGradient" x1="9" y1="9" x2="30" y2="31" gradientUnits="userSpaceOnUse"><stop stop-color="#68B1FF"/><stop offset="1" stop-color="#3478F6"/></linearGradient></defs><rect x="2" y="2" width="36" height="36" rx="12" fill="#142944"/><path d="M9.7 28.5 17.6 12.6c.9-1.8 3.8-1.8 4.7 0l8 15.9h-5.6l-2-4.2h-5.6l-2.1 4.2H9.7Z" fill="url(#brandMarkGradient)"/><path d="M16.8 21.5h7.1" stroke="#142944" stroke-width="2.8" stroke-linecap="round"/></svg></span>
       <span class="brand-name">Apps<span>Installer</span></span>
     </a>
     <label class="search">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.2 4.2"/></svg>
       <input id="search" type="search" placeholder="Search apps..." aria-label="Search apps">
     </label>
-    <button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 0 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/></svg></button>
+    <button class="icon-button" id="settings-button" type="button" aria-label="Open appearance settings" title="Settings"><svg class="settings-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h5m4 0h7M4 12h2m4 0h10M4 18h8m4 0h4"/><circle cx="11" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/></svg></button>
   </div>
   <div class="package-nav-wrap">
     <nav class="package-nav" aria-label="App categories">
@@ -62,7 +66,7 @@
   <div class="hero-art" aria-hidden="true">
     <div class="hero-art-glow"></div>
     <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
-    <div class="hero-tile tile-main"><svg viewBox="0 0 64 64" fill="none"><rect x="7" y="7" width="50" height="50" rx="16" fill="currentColor" opacity=".12"/><path d="M19 43 29 21h6l10 22h-7l-2-5H28l-2 5h-7Z" fill="currentColor"/><path d="M29 33h6" stroke="var(--surface)" stroke-width="3" stroke-linecap="round"/></svg></div>
+    <div class="hero-tile tile-main"><svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="heroMarkGradient" x1="15" y1="13" x2="49" y2="51" gradientUnits="userSpaceOnUse"><stop stop-color="#68B1FF"/><stop offset="1" stop-color="#3478F6"/></linearGradient></defs><rect x="7" y="7" width="50" height="50" rx="16" fill="#142944"/><path d="M15 46 26.7 20.8c1.3-2.7 5.3-2.7 6.6 0L45 46h-8.1l-3-6.2H26l-3 6.2h-8Z" fill="url(#heroMarkGradient)"/><path d="M25.3 35h13.4" stroke="#142944" stroke-width="4" stroke-linecap="round"/></svg></div>
     <div class="hero-tile tile-small tile-left"><svg viewBox="0 0 24 24"><path d="M3 5.2 10.5 4v7H3V5.2Zm9-1.4L21 2.4V11h-9V3.8ZM3 13h7.5v7L3 18.8V13Zm9 0h9v8.6L12 20.2V13Z"/></svg></div>
     <div class="hero-tile tile-small tile-right"><svg viewBox="0 0 24 24"><path d="m12 3 8 4.2v9.6L12 21l-8-4.2V7.2L12 3Z"/><path d="m8.5 12 2.2 2.2 4.8-4.8"/></svg></div>
     <div class="hero-spark spark-one"></div><div class="hero-spark spark-two"></div>
