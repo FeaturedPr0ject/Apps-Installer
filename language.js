@@ -78,6 +78,10 @@
       settingsAria: "Open appearance settings",
       closeAria: "Close settings",
       appCategoriesAria: "App categories",
+      categoryMenuHeading: "BROWSE CATEGORIES",
+      categoryAllDescription: "Show every app",
+      categoryWindowsDescription: "Apps for Windows",
+      categorySystemDescription: "System utilities and tools",
       accentAria: "Accent color"
     },
     vi: {
@@ -156,6 +160,10 @@
       settingsAria: "Mở cài đặt giao diện",
       closeAria: "Đóng cài đặt",
       appCategoriesAria: "Danh mục ứng dụng",
+      categoryMenuHeading: "CHỌN DANH MỤC",
+      categoryAllDescription: "Hiển thị tất cả ứng dụng",
+      categoryWindowsDescription: "Ứng dụng dành cho Windows",
+      categorySystemDescription: "Tiện ích và công cụ hệ thống",
       accentAria: "Màu nhấn"
     }
   };
@@ -218,11 +226,26 @@
       settingsButton.setAttribute("aria-label", dict.settingsAria);
     }
 
-    const nav = document.getElementById("package-nav");
-    if (nav) nav.setAttribute("aria-label", dict.appCategoriesAria);
-    setTextNode('.package-tab[data-category="all"]', "all");
-    setTextNode('.package-tab[data-category="windows-package"]', "windowsPackage");
-    setTextNode('.package-tab[data-category="system-package"]', "systemPackage");
+    const categoryMenu = document.getElementById("category-menu");
+    if (categoryMenu) categoryMenu.setAttribute("aria-label", dict.appCategoriesAria);
+    const categoryNames = {
+      all: "all",
+      "windows-package": "windowsPackage",
+      "system-package": "systemPackage"
+    };
+    Object.entries(categoryNames).forEach(([category, key]) => {
+      const label = document.querySelector('[data-category-name="' + category + '"]');
+      if (label) label.textContent = dict[key];
+    });
+    const activeCategoryOption = document.querySelector('.category-option[aria-checked="true"]');
+    const categoryTriggerLabel = document.getElementById("category-trigger-label");
+    if (activeCategoryOption && categoryTriggerLabel) {
+      categoryTriggerLabel.textContent = activeCategoryOption.querySelector("[data-category-name]")?.textContent || dict.all;
+    }
+    setText("#category-menu-heading", "categoryMenuHeading");
+    setText("#category-all-description", "categoryAllDescription");
+    setText("#category-windows-description", "categoryWindowsDescription");
+    setText("#category-system-description", "categorySystemDescription");
 
     setTextNode(".hero-eyebrow", "heroEyebrow");
     const heroTitle = document.querySelector(".hero h1");
