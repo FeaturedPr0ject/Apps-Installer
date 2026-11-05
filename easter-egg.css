@@ -1,0 +1,213 @@
+#apps-easter-egg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 28px;
+  box-sizing: border-box;
+  background: #050608;
+  color: #ff303a;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .12s linear, background-color .12s linear;
+}
+
+#apps-easter-egg-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#apps-easter-egg-overlay::before,
+#apps-easter-egg-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#apps-easter-egg-overlay::before {
+  opacity: .24;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 3px,
+    rgba(255, 255, 255, .12) 4px,
+    transparent 5px 7px
+  );
+  mix-blend-mode: screen;
+}
+
+#apps-easter-egg-overlay::after {
+  opacity: .14;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 11px,
+    rgba(255, 40, 55, .28) 12px,
+    transparent 13px 21px
+  );
+  animation: egg-static-shift .16s steps(2, end) infinite;
+}
+
+.egg-message {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1120px);
+  margin: 0;
+  color: #ff3541;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: clamp(30px, 6.2vw, 76px);
+  font-weight: 850;
+  line-height: 1.25;
+  letter-spacing: .035em;
+  text-align: center;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  text-shadow:
+    0 0 7px rgba(255, 30, 45, .9),
+    0 0 24px rgba(255, 20, 35, .6),
+    3px 0 0 rgba(255, 255, 255, .12),
+    -3px 0 0 rgba(0, 210, 255, .1);
+  transform-origin: center;
+}
+
+.egg-message.is-typing {
+  animation: egg-violent-shake .105s steps(2, end) infinite;
+}
+
+#apps-easter-egg-overlay.is-whiteout {
+  background: #fff;
+  opacity: 1;
+}
+
+#apps-easter-egg-overlay.is-whiteout::before,
+#apps-easter-egg-overlay.is-whiteout::after,
+#apps-easter-egg-overlay.is-whiteout .egg-message {
+  opacity: 0;
+}
+
+.brand .brand-name {
+  transform-origin: center;
+}
+
+.brand.egg-warning-1 .brand-name,
+.brand.egg-warning-1 .brand-name span {
+  color: #e5a02c;
+  text-shadow: 0 0 10px rgba(229, 160, 44, .3);
+}
+
+.brand.egg-warning-2 .brand-name,
+.brand.egg-warning-2 .brand-name span {
+  color: #f06435;
+  text-shadow: 0 0 12px rgba(240, 100, 53, .45);
+}
+
+.brand.egg-warning-3 .brand-name,
+.brand.egg-warning-3 .brand-name span {
+  color: #ff303a;
+  text-shadow: 0 0 8px rgba(255, 48, 58, .8), 0 0 20px rgba(255, 48, 58, .45);
+  animation: egg-brand-warning .14s steps(2, end) infinite;
+}
+
+.brand-name.egg-random-glitch {
+  animation: egg-random-glitch .22s steps(2, end) both;
+}
+
+.egg-shard {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+  animation: egg-shatter .82s cubic-bezier(.2, .7, .15, 1) forwards;
+  animation-delay: var(--egg-delay, 0ms);
+}
+
+.egg-toast {
+  position: fixed;
+  z-index: 99990;
+  top: 96px;
+  left: 50%;
+  width: max-content;
+  max-width: min(90vw, 520px);
+  padding: 11px 17px;
+  border: 1px solid rgba(255, 65, 75, .42);
+  border-radius: 13px;
+  background: rgba(20, 8, 11, .94);
+  color: #ff555e;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .22), 0 0 22px rgba(255, 35, 50, .12);
+  font: 800 11px/1.45 "Manrope", "Segoe UI", sans-serif;
+  letter-spacing: .13em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -10px) scale(.97);
+  animation: egg-toast-in .24s ease-out forwards, egg-toast-out .28s ease-in 1.6s forwards;
+}
+
+.egg-toast.egg-toast-critical {
+  font-size: 13px;
+  letter-spacing: .17em;
+  border-color: rgba(255, 48, 58, .75);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .25), 0 0 30px rgba(255, 35, 50, .28);
+}
+
+@keyframes egg-violent-shake {
+  0% { transform: translate(0, 0) rotate(0) skew(0); }
+  12% { transform: translate(-7px, 3px) rotate(-1.4deg) skew(-1deg); }
+  25% { transform: translate(6px, -4px) rotate(1.6deg) skew(1.2deg); }
+  37% { transform: translate(-5px, -3px) rotate(-1.1deg) skew(.8deg); }
+  50% { transform: translate(8px, 4px) rotate(1.8deg) skew(-1.4deg); }
+  62% { transform: translate(-6px, 2px) rotate(-1.5deg) skew(1deg); }
+  75% { transform: translate(5px, -5px) rotate(1.2deg) skew(-1deg); }
+  87% { transform: translate(-4px, 4px) rotate(-1deg) skew(1.3deg); }
+  100% { transform: translate(0, 0) rotate(0) skew(0); }
+}
+
+@keyframes egg-brand-warning {
+  0% { transform: translate(0, 0) rotate(0); }
+  25% { transform: translate(-2px, 1px) rotate(-.8deg); }
+  50% { transform: translate(2px, -1px) rotate(.8deg); }
+  75% { transform: translate(-1px, -1px) rotate(-.5deg); }
+  100% { transform: translate(0, 0) rotate(0); }
+}
+
+@keyframes egg-random-glitch {
+  0% { transform: translate(0, 0) skew(0); filter: none; }
+  20% { transform: translate(-3px, 1px) skew(-5deg); filter: saturate(2); }
+  45% { transform: translate(4px, -2px) skew(4deg); filter: hue-rotate(55deg); }
+  70% { transform: translate(-2px, 2px) skew(-2deg); filter: contrast(1.8); }
+  100% { transform: translate(0, 0) skew(0); filter: none; }
+}
+
+@keyframes egg-shatter {
+  0% { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); filter: blur(0); }
+  35% { opacity: 1; transform: translate(calc(var(--egg-x) * .25), calc(var(--egg-y) * .25)) rotate(calc(var(--egg-r) * .3)) scale(1.08); }
+  100% { opacity: 0; transform: translate(var(--egg-x), var(--egg-y)) rotate(var(--egg-r)) scale(.25); filter: blur(5px); }
+}
+
+@keyframes egg-static-shift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -2px); }
+  100% { transform: translate(-2px, 2px); }
+}
+
+@keyframes egg-toast-in {
+  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+@keyframes egg-toast-out {
+  to { opacity: 0; transform: translate(-50%, -7px) scale(.98); }
+}
+
+@media (max-width: 560px) {
+  #apps-easter-egg-overlay { padding: 20px; }
+  .egg-message { font-size: clamp(27px, 8vw, 48px); }
+  .egg-toast { top: 88px; max-width: calc(100vw - 32px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .egg-message.is-typing { animation-duration: .22s; }
+  .brand.egg-warning-3 .brand-name { animation-duration: .28s; }
+  #apps-easter-egg-overlay::after { animation-duration: .3s; }
+}
