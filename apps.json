@@ -37,10 +37,10 @@
     "category": "windows-package"
   },
   {
-    "name": "Proton VPN",
+    "name": "HotSpot Shield",
     "image": "https://protonvpn.com/favicons/android-chrome-192x192.png",
-    "download": "https://protonvpn.com/download/ProtonVPN_v5.1.8_x64.exe",
-    "about": "The Proton VPN app for Windows is the best way to ensure safety and privacy while browsing the internet. It is open-source, easy to use, and packed with useful security features.",
+    "download": "https://d26wo1m3adcxu5.cloudfront.net/HSS-773-ALT%7Bal_token%7D.exe?ko_click_id=ko_52496aec1a513f178",
+    "about": "Protect yourself with military-grade encryption, and access sites and streaming content around the world.",
     "category": "windows-package"
   },
   {
