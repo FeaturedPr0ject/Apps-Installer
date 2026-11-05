@@ -64,13 +64,13 @@
     modal.querySelectorAll("[data-theme-value]").forEach(button => {
       button.setAttribute("aria-pressed", String(button.dataset.themeValue === draftSettings.theme));
     });
-    const selectedChoice = [...modal.querySelectorAll("[data-accent-value]")]
+    const selectedChoice = [...accentMenu.querySelectorAll("[data-accent-value]")]
       .find(choice => choice.dataset.accentValue === draftSettings.accent);
     if (selectedChoice) {
       accentCurrentLabel.textContent = selectedChoice.querySelector("span:nth-child(2)").textContent;
       accentCurrentDot.style.setProperty("--swatch", draftSettings.accent);
     }
-    modal.querySelectorAll("[data-accent-value]").forEach(choice => {
+    accentMenu.querySelectorAll("[data-accent-value]").forEach(choice => {
       choice.setAttribute("aria-selected", String(choice.dataset.accentValue === draftSettings.accent));
     });
   }
@@ -104,7 +104,13 @@
   }
 
   function setAccentMenu(open) {
-    accentMenu.hidden = !open;
+    if (open) {
+      window.AppPopup?.open(accentMenu, accentTrigger);
+      if (!window.AppPopup) accentMenu.hidden = false;
+    } else {
+      window.AppPopup?.close(accentMenu);
+      if (!window.AppPopup) accentMenu.hidden = true;
+    }
     accentTrigger.setAttribute("aria-expanded", String(open));
   }
 
@@ -112,7 +118,23 @@
   closeButton.addEventListener("click", () => closeSettings());
   cancelButton.addEventListener("click", () => closeSettings());
   accentTrigger.addEventListener("click", () => {
-    setAccentMenu(accentMenu.hidden);
+    setAccentMenu(!window.AppPopup?.isOpen(accentMenu));
+  });
+
+  accentMenu.addEventListener("click", event => {
+    const accentChoice = event.target.closest("[data-accent-value]");
+    if (!accentChoice) return;
+    draftSettings.accent = accentChoice.dataset.accentValue;
+    updateControls();
+    applySettings(draftSettings);
+    setAccentMenu(false);
+    accentTrigger.focus();
+  });
+
+  document.addEventListener("click", event => {
+    if (!modal.hidden && !accentPicker.contains(event.target) && !accentMenu.contains(event.target)) {
+      setAccentMenu(false);
+    }
   });
 
   modal.addEventListener("click", event => {
@@ -124,14 +146,7 @@
       applySettings(draftSettings);
     }
 
-    const accentChoice = event.target.closest("[data-accent-value]");
-    if (accentChoice) {
-      draftSettings.accent = accentChoice.dataset.accentValue;
-      updateControls();
-      applySettings(draftSettings);
-      setAccentMenu(false);
-      accentTrigger.focus();
-    } else if (accentPicker && !accentPicker.contains(event.target)) {
+    if (accentPicker && !accentPicker.contains(event.target)) {
       setAccentMenu(false);
     }
   });
