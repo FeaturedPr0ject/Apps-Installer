@@ -412,7 +412,13 @@
 
   function setLanguageSettingMenu(open) {
     if (!languageSettingMenu || !languageSetting) return;
-    languageSettingMenu.hidden = !open;
+    if (open) {
+      window.AppPopup?.open(languageSettingMenu, languageSetting);
+      if (!window.AppPopup) languageSettingMenu.hidden = false;
+    } else {
+      window.AppPopup?.close(languageSettingMenu);
+      if (!window.AppPopup) languageSettingMenu.hidden = true;
+    }
     languageSetting.setAttribute("aria-expanded", String(open));
   }
 
@@ -429,7 +435,9 @@
   });
 
   document.addEventListener("click", event => {
-    if (languageSettingPicker && !languageSettingPicker.contains(event.target)) {
+    if (languageSettingPicker &&
+        !languageSettingPicker.contains(event.target) &&
+        !languageSettingMenu?.contains(event.target)) {
       setLanguageSettingMenu(false);
     }
   });
