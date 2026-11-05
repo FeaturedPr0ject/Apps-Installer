@@ -5,10 +5,13 @@
   display: grid;
   place-items: center;
   overflow: hidden;
+  isolation: isolate;
   padding: 28px;
   box-sizing: border-box;
-  background: #050608;
-  color: #ff303a;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(75, 0, 9, .48), transparent 48%),
+    radial-gradient(ellipse at 50% 50%, #160006 0%, #050204 54%, #000 100%);
+  color: #ff263c;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -19,36 +22,48 @@
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  animation: egg-background-pulse .42s steps(2, end) infinite;
 }
 
 #apps-easter-egg-overlay::before,
 #apps-easter-egg-overlay::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -3%;
+  z-index: -1;
   pointer-events: none;
 }
 
 #apps-easter-egg-overlay::before {
-  opacity: .24;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0 3px,
-    rgba(255, 255, 255, .12) 4px,
-    transparent 5px 7px
-  );
+  opacity: .5;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 2px,
+      rgba(255, 255, 255, .17) 3px,
+      transparent 4px 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 13px,
+      rgba(255, 0, 25, .13) 14px,
+      transparent 15px 25px
+    );
   mix-blend-mode: screen;
+  animation: egg-scanline-drift .13s steps(2, end) infinite;
 }
 
 #apps-easter-egg-overlay::after {
-  opacity: .14;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0 11px,
-    rgba(255, 40, 55, .28) 12px,
-    transparent 13px 21px
-  );
-  animation: egg-static-shift .16s steps(2, end) infinite;
+  opacity: .85;
+  background:
+    radial-gradient(ellipse at center, transparent 17%, rgba(0, 0, 0, .35) 49%, #000 100%),
+    radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(255, 0, 28, .16) 61%, transparent 73%),
+    repeating-linear-gradient(
+      177deg,
+      rgba(255, 0, 32, .07) 0 1px,
+      transparent 2px 5px
+    );
+  animation: egg-static-chaos .075s steps(2, end) infinite;
 }
 
 .egg-message {
@@ -56,36 +71,42 @@
   z-index: 1;
   width: min(100%, 1120px);
   margin: 0;
-  color: #ff3541;
-  font-family: "Manrope", "Segoe UI", sans-serif;
-  font-size: clamp(30px, 6.2vw, 76px);
-  font-weight: 850;
-  line-height: 1.25;
-  letter-spacing: .035em;
+  color: #ff344b;
+  font-family: "Roboto Mono", "Consolas", monospace;
+  font-size: clamp(29px, 5.6vw, 66px);
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: .015em;
   text-align: center;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
+  -webkit-font-smoothing: antialiased;
   text-shadow:
-    0 0 7px rgba(255, 30, 45, .9),
-    0 0 24px rgba(255, 20, 35, .6),
-    3px 0 0 rgba(255, 255, 255, .12),
-    -3px 0 0 rgba(0, 210, 255, .1);
+    0 0 2px rgba(255, 30, 48, .95),
+    0 0 12px rgba(255, 0, 28, .82),
+    0 0 36px rgba(255, 0, 25, .52);
   transform-origin: center;
+  will-change: transform, filter;
 }
 
 .egg-message.is-typing {
-  animation: egg-violent-shake .105s steps(2, end) infinite;
+  animation: egg-violent-shake .072s steps(2, end) infinite;
 }
 
 #apps-easter-egg-overlay.is-whiteout {
-  background: #fff;
+  z-index: 100001;
+  background: #fff !important;
   opacity: 1;
+  visibility: visible;
+  animation: none !important;
+  transition: none;
 }
 
 #apps-easter-egg-overlay.is-whiteout::before,
 #apps-easter-egg-overlay.is-whiteout::after,
 #apps-easter-egg-overlay.is-whiteout .egg-message {
-  opacity: 0;
+  opacity: 0 !important;
+  animation: none !important;
 }
 
 .brand .brand-name {
@@ -153,15 +174,37 @@
 }
 
 @keyframes egg-violent-shake {
-  0% { transform: translate(0, 0) rotate(0) skew(0); }
-  12% { transform: translate(-7px, 3px) rotate(-1.4deg) skew(-1deg); }
-  25% { transform: translate(6px, -4px) rotate(1.6deg) skew(1.2deg); }
-  37% { transform: translate(-5px, -3px) rotate(-1.1deg) skew(.8deg); }
-  50% { transform: translate(8px, 4px) rotate(1.8deg) skew(-1.4deg); }
-  62% { transform: translate(-6px, 2px) rotate(-1.5deg) skew(1deg); }
-  75% { transform: translate(5px, -5px) rotate(1.2deg) skew(-1deg); }
-  87% { transform: translate(-4px, 4px) rotate(-1deg) skew(1.3deg); }
-  100% { transform: translate(0, 0) rotate(0) skew(0); }
+  0% { transform: translate3d(0, 0, 0) rotate(0) skew(0) scale(1); filter: blur(0); }
+  8% { transform: translate3d(-18px, 8px, 0) rotate(-4deg) skew(-3deg) scale(1.035); filter: blur(.35px); }
+  17% { transform: translate3d(15px, -11px, 0) rotate(3.5deg) skew(2.5deg) scale(.985); filter: blur(0); }
+  26% { transform: translate3d(-13px, -8px, 0) rotate(-3deg) skew(3deg) scale(1.025); filter: blur(.55px); }
+  35% { transform: translate3d(19px, 10px, 0) rotate(4.5deg) skew(-3.5deg) scale(.98); filter: blur(0); }
+  44% { transform: translate3d(-17px, 4px, 0) rotate(-4deg) skew(2deg) scale(1.04); filter: blur(.4px); }
+  53% { transform: translate3d(12px, -12px, 0) rotate(3deg) skew(-3deg) scale(.99); filter: blur(0); }
+  62% { transform: translate3d(-20px, -5px, 0) rotate(-4.5deg) skew(3.5deg) scale(1.035); filter: blur(.5px); }
+  71% { transform: translate3d(16px, 9px, 0) rotate(3.5deg) skew(-2.5deg) scale(.985); filter: blur(0); }
+  80% { transform: translate3d(-11px, -10px, 0) rotate(-3deg) skew(2deg) scale(1.03); filter: blur(.3px); }
+  90% { transform: translate3d(18px, 6px, 0) rotate(4deg) skew(-3deg) scale(.98); filter: blur(0); }
+  100% { transform: translate3d(0, 0, 0) rotate(0) skew(0) scale(1); filter: blur(0); }
+}
+
+@keyframes egg-background-pulse {
+  0%, 100% { filter: contrast(1.1) brightness(.72); }
+  50% { filter: contrast(1.55) brightness(.9) saturate(1.5); }
+}
+
+@keyframes egg-scanline-drift {
+  0% { transform: translate(0, 0); opacity: .42; }
+  50% { transform: translate(0, 4px); opacity: .68; }
+  100% { transform: translate(0, -3px); opacity: .5; }
+}
+
+@keyframes egg-static-chaos {
+  0% { transform: translate(0, 0) scale(1); filter: contrast(1.2); }
+  25% { transform: translate(-7px, 3px) scale(1.015); filter: contrast(2.1) hue-rotate(-8deg); }
+  50% { transform: translate(5px, -4px) scale(.99); filter: contrast(1.5) brightness(.78); }
+  75% { transform: translate(-3px, -2px) scale(1.01); filter: contrast(2.2) hue-rotate(8deg); }
+  100% { transform: translate(4px, 5px) scale(1); filter: contrast(1.25); }
 }
 
 @keyframes egg-brand-warning {
@@ -202,12 +245,13 @@
 
 @media (max-width: 560px) {
   #apps-easter-egg-overlay { padding: 20px; }
-  .egg-message { font-size: clamp(27px, 8vw, 48px); }
+  .egg-message { font-size: clamp(26px, 7.2vw, 46px); }
   .egg-toast { top: 88px; max-width: calc(100vw - 32px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .egg-message.is-typing { animation-duration: .22s; }
+  .egg-message.is-typing { animation: egg-violent-shake .14s steps(2, end) infinite; }
   .brand.egg-warning-3 .brand-name { animation-duration: .28s; }
-  #apps-easter-egg-overlay::after { animation-duration: .3s; }
+  #apps-easter-egg-overlay::before,
+  #apps-easter-egg-overlay::after { animation-duration: .2s; }
 }
