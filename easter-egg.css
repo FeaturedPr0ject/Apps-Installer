@@ -243,6 +243,67 @@
   to { opacity: 0; transform: translate(-50%, -7px) scale(.98); }
 }
 
+#apps-easter-egg-overlay.has-jumpscare {
+  background:
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--entity-tint, #e8f1ed) 20%, transparent), transparent 56%),
+    var(--entity-background, #020303);
+  animation: egg-entity-screen .075s steps(2, end) infinite;
+}
+
+#apps-easter-egg-overlay.has-jumpscare::before {
+  opacity: .38;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 1px, color-mix(in srgb, var(--entity-tint, #e8f1ed) 35%, transparent) 2px, transparent 3px 5px),
+    repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,.08) 19px, transparent 20px 29px);
+}
+
+#apps-easter-egg-overlay.has-jumpscare::after {
+  opacity: .65;
+  background:
+    radial-gradient(ellipse at center, transparent 22%, rgba(0,0,0,.45) 68%, #000 100%),
+    repeating-linear-gradient(177deg, rgba(255,255,255,.06) 0 1px, transparent 2px 5px);
+}
+
+.egg-entity-image {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 12px color-mix(in srgb, var(--entity-tint, #e8f1ed) 72%, transparent))
+    drop-shadow(0 0 36px color-mix(in srgb, var(--entity-tint, #e8f1ed) 38%, transparent));
+  animation: egg-jumpscare-pop .11s steps(2, end) both, egg-jumpscare-flicker .085s steps(2, end) .11s infinite;
+}
+
+#apps-easter-egg-overlay.entity-image-unavailable::before {
+  opacity: .9;
+}
+
+@keyframes egg-jumpscare-pop {
+  0% { opacity: 0; transform: scale(.22) rotate(-5deg); filter: blur(12px) contrast(2.4); }
+  65% { opacity: 1; transform: scale(1.12) rotate(1.6deg); filter: blur(0) contrast(1.8); }
+  100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0) contrast(1.25); }
+}
+
+@keyframes egg-jumpscare-flicker {
+  0%, 100% { opacity: 1; }
+  25% { opacity: .76; }
+  50% { opacity: .94; }
+  75% { opacity: .62; }
+}
+
+@keyframes egg-entity-screen {
+  0%, 100% { filter: contrast(1.2) brightness(.92); }
+  50% { filter: contrast(1.8) brightness(1.08); }
+}
+
+
 @media (max-width: 560px) {
   #apps-easter-egg-overlay { padding: 20px; }
   .egg-message { font-size: clamp(26px, 7.2vw, 46px); }
