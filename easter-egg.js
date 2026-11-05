@@ -124,12 +124,41 @@
         id: "G-26",
         tint: "#E8F1ED",
         background: "#020303",
-        image: "https://static.wikia.nocookie.net/rooms-low-detailed/images/6/6c/JumpscareG26.gif",
-        fallback: "https://static.wikia.nocookie.net/rooms-low-detailed/images/6/6c/JumpscareG26.gif/revision/latest/scale-to-width-down/120?cb=20230731164709"
+        image: "./assets/entities/g-26.svg"
+      },
+      {
+        id: "G-159",
+        tint: "#9BE22A",
+        background: "#040702",
+        image: "./assets/entities/g-159.svg"
+      },
+      {
+        id: "A-60",
+        tint: "#DC0000",
+        background: "#100102",
+        image: "./assets/entities/a-60.svg"
+      },
+      {
+        id: "G-60",
+        tint: "#39F9FF",
+        background: "#00141A",
+        image: "./assets/entities/g-60.svg"
+      },
+      {
+        id: "G-55",
+        tint: "#C8C8C8",
+        background: "#050505",
+        image: "./assets/entities/g-55.svg"
       }
     ];
 
-    const entity = entities[Math.floor(Math.random() * entities.length)];
+    let previousEntity = "";
+    try { previousEntity = sessionStorage.getItem("appsInstallerLastEntity") || ""; } catch {}
+    const available = entities.filter(entity => entity.id !== previousEntity);
+    const entity = available[Math.floor(Math.random() * available.length)] || entities[0];
+
+    try { sessionStorage.setItem("appsInstallerLastEntity", entity.id); } catch {}
+
     overlay.dataset.entity = entity.id;
     overlay.style.setProperty("--entity-tint", entity.tint);
     overlay.style.setProperty("--entity-background", entity.background);
@@ -137,17 +166,11 @@
 
     const image = document.createElement("img");
     image.className = "egg-entity-image";
-    image.alt = entity.id + " jumpscare";
+    image.alt = entity.id + " original fan-made jumpscare illustration";
     image.decoding = "async";
     image.draggable = false;
     image.src = entity.image;
-    image.dataset.fallbackUsed = "false";
     image.addEventListener("error", () => {
-      if (image.dataset.fallbackUsed === "false") {
-        image.dataset.fallbackUsed = "true";
-        image.src = entity.fallback;
-        return;
-      }
       image.remove();
       overlay.classList.add("entity-image-unavailable");
     });
@@ -157,7 +180,6 @@
 
     window.setTimeout(() => showWhiteoutAndReload(overlay), 1800);
   }
-
   function createFinalOverlay() {
     const overlay = document.createElement("div");
     overlay.id = "apps-easter-egg-overlay";
