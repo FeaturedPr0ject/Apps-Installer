@@ -266,7 +266,8 @@
       if (loadingText) loadingText.nodeValue = dict.pleaseWait;
     }
     setText(".section-eyebrow", "browse");
-    setText("#category-title", "all");
+    const selectedCategory = document.querySelector('.category-option[aria-checked="true"]')?.dataset.category || "all";
+    setText("#category-title", categoryNames[selectedCategory] || "all");
     setText(".disclosure-copy > strong", "disclosureTitle");
     setText(".disclosure-copy > span", "disclosureBody");
     setText(".footer-copy", "footerDescription");
