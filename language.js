@@ -174,7 +174,13 @@
   function readSavedLanguage() {
     try {
       const value = localStorage.getItem(STORAGE_KEY);
-      return value === "vi" || value === "en" ? value : "vi";
+      if (value === "vi" || value === "en") {
+        if (localStorage.getItem(PROMPT_SEEN_KEY) !== "1") {
+          localStorage.setItem(PROMPT_SEEN_KEY, "1");
+        }
+        return value;
+      }
+      return "vi";
     } catch {
       return "vi";
     }
@@ -308,7 +314,7 @@
 
     if (languageSetting && languageSettingCurrent) {
       languageSettingCurrent.textContent = currentLanguage === "vi" ? "Tiếng Việt" : "English";
-      languageSetting.setAttribute("aria-expanded", "false");
+      setLanguageSettingMenu(false);
     }
     document.querySelectorAll("[data-language-setting-value]").forEach(option => {
       option.setAttribute("aria-selected", String(option.dataset.languageSettingValue === currentLanguage));
