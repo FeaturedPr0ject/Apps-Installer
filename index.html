@@ -119,6 +119,16 @@ function setCategoryMenu(open) {
   categoryMenu.dataset.open = String(open);
   categoryMenu.setAttribute("aria-hidden", String(!open));
   categoryTrigger.setAttribute("aria-expanded", String(open));
+  if (open) {
+    const selected = categoryButtons.find(button => button.dataset.category === activeCategory);
+    selected?.focus();
+  }
+}
+
+function animateCategoryTitle() {
+  categoryTitle.classList.remove("category-title-enter");
+  void categoryTitle.offsetWidth;
+  categoryTitle.classList.add("category-title-enter");
 }
 
 function updateCategorySelection() {
@@ -338,12 +348,26 @@ categoryButtons.forEach(button => {
     updateCategorySelection();
     setCategoryMenu(false);
     applyFilters();
+    animateCategoryTitle();
     categoryTrigger?.focus();
   });
 });
 
 document.addEventListener("click", event => {
   if (categoryPicker && !categoryPicker.contains(event.target)) setCategoryMenu(false);
+});
+
+categoryMenu?.addEventListener("keydown", event => {
+  if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+  const options = [...categoryButtons];
+  const currentIndex = options.indexOf(document.activeElement);
+  let nextIndex = currentIndex;
+  if (event.key === "ArrowDown") nextIndex = (currentIndex + 1) % options.length;
+  if (event.key === "ArrowUp") nextIndex = (currentIndex - 1 + options.length) % options.length;
+  if (event.key === "Home") nextIndex = 0;
+  if (event.key === "End") nextIndex = options.length - 1;
+  event.preventDefault();
+  options[nextIndex]?.focus();
 });
 
 document.addEventListener("keydown", event => {
