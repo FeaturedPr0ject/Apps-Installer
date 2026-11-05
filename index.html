@@ -120,8 +120,11 @@ function setCategoryMenu(open) {
   categoryMenu.setAttribute("aria-hidden", String(!open));
   categoryTrigger.setAttribute("aria-expanded", String(open));
   if (open) {
+    window.AppPopup?.open(categoryMenu, categoryTrigger);
     const selected = categoryButtons.find(button => button.dataset.category === activeCategory);
     selected?.focus();
+  } else {
+    window.AppPopup?.close(categoryMenu);
   }
 }
 
@@ -274,6 +277,8 @@ function render(items) {
       menu.className = "download-menu";
       menu.setAttribute("role", "menu");
       menu.hidden = true;
+      menu._downloadOwner = downloadWrap;
+      toggle._downloadMenu = menu;
 
       extraOptions.forEach(option => {
         const link = document.createElement("a");
@@ -528,6 +533,7 @@ init();
   </section>
 </div>
 
+<script src="./popup-manager.js"></script>
 <script src="./responsibility.js"></script>
 <script src="./language.js"></script>
 <script src="./settings.js"></script>
