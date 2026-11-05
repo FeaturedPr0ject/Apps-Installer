@@ -31,8 +31,24 @@
 <link rel="stylesheet" href="./styles.css?v=20261105-popup-motion-4">
 <link rel="stylesheet" href="./language.css?v=20261105-popup-motion-4">
 <link rel="stylesheet" href="./responsibility.css?v=20261105-popup-motion-4">
+<link rel="stylesheet" href="./security-gate.css?v=20261105-security-1">
 </head>
 <body>
+<div class="security-gate" id="security-gate" role="dialog" aria-modal="true" aria-labelledby="security-title" aria-describedby="security-description">
+  <section class="security-gate-panel">
+    <div class="security-gate-emblem" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3 19 6v5.4c0 4.4-3 7.8-7 9.6-4-1.8-7-5.2-7-9.6V6l7-3Z"/><path d="m8.8 12.2 2.1 2.1 4.5-4.5"/></svg>
+    </div>
+    <p class="security-gate-eyebrow" id="security-eyebrow">BẢO VỆ TRUY CẬP</p>
+    <h2 id="security-title">Đang kiểm tra truy cập</h2>
+    <p class="security-gate-description" id="security-description">Hệ thống đang kiểm tra tín hiệu bảo mật của trình duyệt. Nếu cần, bạn sẽ được yêu cầu xác nhận mình không phải robot.</p>
+    <div class="security-spinner" id="security-spinner" aria-hidden="true"></div>
+    <div id="turnstile-widget"></div>
+    <p class="security-status" id="security-status" aria-live="polite">Đang xác minh...</p>
+    <button class="security-retry" id="security-retry" type="button" hidden>Thử lại</button>
+    <p class="security-privacy" id="security-privacy">Cloudflare Turnstile xử lý một số tín hiệu kỹ thuật của trình duyệt và mạng để nhận diện lưu lượng tự động.</p>
+  </section>
+</div>
 <header class="site-header">
   <div class="top">
     <a class="brand" href="./" aria-label="Apps Installer home">
@@ -531,6 +547,7 @@ init();
   </section>
 </div>
 
+<script src="./security-gate.js?v=20261105-security-1"></script>
 <script src="./popup-manager.js?v=20261105-popup-motion-4"></script>
 <script src="./responsibility.js?v=20261105-popup-motion-4"></script>
 <script src="./language.js?v=20261105-popup-motion-4"></script>
