@@ -116,7 +116,6 @@ let apps = [];
 
 function setCategoryMenu(open) {
   if (!categoryMenu || !categoryTrigger) return;
-  categoryMenu.dataset.open = String(open);
   categoryMenu.setAttribute("aria-hidden", String(!open));
   categoryTrigger.setAttribute("aria-expanded", String(open));
   if (open) {
@@ -344,7 +343,7 @@ function applyFilters() {
 }
 
 categoryTrigger?.addEventListener("click", () => {
-  setCategoryMenu(categoryMenu.dataset.open !== "true");
+  setCategoryMenu(categoryTrigger.getAttribute("aria-expanded") !== "true");
 });
 
 categoryButtons.forEach(button => {
