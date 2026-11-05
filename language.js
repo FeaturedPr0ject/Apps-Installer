@@ -170,9 +170,9 @@
   function readSavedLanguage() {
     try {
       const value = localStorage.getItem(STORAGE_KEY);
-      return value === "vi" || value === "en" ? value : "en";
+      return value === "vi" || value === "en" ? value : "vi";
     } catch {
-      return "en";
+      return "vi";
     }
   }
 
@@ -303,7 +303,7 @@
     setText(".language-choice[data-language-choice='en'] .language-choice-copy small", "englishSubtitle");
 
     if (languageSetting) languageSetting.value = currentLanguage;
-    document.title = "Apps Installer";
+    document.title = currentLanguage === "vi" ? "Apps Installer – Khám phá ứng dụng" : "Apps Installer – Discover Applications";
   }
 
   function setLanguage(language) {
