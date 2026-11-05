@@ -36,6 +36,7 @@
     document.body.classList.remove("responsibility-open");
     document.body.style.overflow = previousOverflow;
     if (returnFocus && typeof returnFocus.focus === "function") returnFocus.focus();
+    window.dispatchEvent(new CustomEvent("apps-installer:responsibility-closed"));
   }
 
   acknowledgeButton.addEventListener("click", closeNotice);
