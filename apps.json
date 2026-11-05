@@ -18,6 +18,28 @@
     "about_vi": "Tải bộ cài Windows chính thức trực tiếp từ CDN của Roblox. Bộ cài vẫn cần kết nối đến các dịch vụ Roblox để hoàn tất cài đặt, cập nhật ứng dụng, đăng nhập và chơi game. Hỗ trợ Windows 10/11 64-bit."
   },
   {
+    "name": "Prism Launcher (MineCraft Launcher)",
+    "image": "https://img.utdstc.com/icon/c94/ea6/c94ea6bea73efd22c84f2d92bb45f745ca72e18efbf6f76c7942e87b2182ec4a:200",
+    "download": "https://release-assets.githubusercontent.com/github-production-release-asset/553135896/e75409cf-216e-4130-a82f-38fdd8960107?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-11-05T09%3A08%3A39Z&rscd=attachment%3B+filename%3DPrismLauncher-Windows-MSVC-Setup-11.1.1.exe&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-11-05T08%3A08%3A02Z&ske=2026-11-05T09%3A08%3A39Z&sks=b&skv=2018-11-09&sig=1PtDS4JSDCyA6U%2BUFQadoUYefXv7CDdhwTZOmk539s8%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc5Mzg2Nzk2MSwibmJmIjoxNzkzODY2MTYxLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.vsqFhCMqSHhHzuI6-OObSylV0lLr9HJ2xbXWJChiUK4&response-content-disposition=attachment%3B%20filename%3DPrismLauncher-Windows-MSVC-Setup-11.1.1.exe&response-content-type=application%2Foctet-stream",
+    "about": "An open-source Minecraft launcher with the ability to manage multiple instances, accounts and mods. Focused on user freedom and free redistributability.",
+    "category": "windows-package",
+    "downloaddl": [
+      {
+        "name": "Portable (xZIP)",
+        "url": "https://release-assets.githubusercontent.com/github-production-release-asset/553135896/2404b5e9-775a-4345-ab4b-85ee4d345677?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-11-05T09%3A11%3A05Z&rscd=attachment%3B+filename%3DPrismLauncher-Windows-MinGW-w64-Portable-11.1.1.zip&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-11-05T08%3A10%3A22Z&ske=2026-11-05T09%3A11%3A05Z&sks=b&skv=2018-11-09&sig=4o3JGZpIr6dObUebZDTenz857Kym1Txdq2GxPGbrSRY%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc5Mzg2ODAyMywibmJmIjoxNzkzODY2MjIzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.qRS_JgPYW_msqaUKcQfzQc2VbIxOh99GFc901VK8lhs&response-content-disposition=attachment%3B%20filename%3DPrismLauncher-Windows-MinGW-w64-Portable-11.1.1.zip&response-content-type=application%2Foctet-stream"
+      },
+      {
+        "name": "ARM64 Install",
+        "url": "https://release-assets.githubusercontent.com/github-production-release-asset/553135896/96d814fe-d136-49e5-b088-a0d8f2a690cc?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-11-05T09%3A12%3A43Z&rscd=attachment%3B+filename%3DPrismLauncher-Windows-MSVC-arm64-Setup-11.1.1.exe&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-11-05T08%3A12%3A06Z&ske=2026-11-05T09%3A12%3A43Z&sks=b&skv=2018-11-09&sig=OHja6%2FLqwUmJgIPK4h3uPqXoR%2FIK%2F8Y4Zuwn75oEMLs%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc5Mzg2ODEyNiwibmJmIjoxNzkzODY2MzI2LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Y7Yg3tLO4iFckdTGzSHJVv5llS0pZf8GEegw_OEdBss&response-content-disposition=attachment%3B%20filename%3DPrismLauncher-Windows-MSVC-arm64-Setup-11.1.1.exe&response-content-type=application%2Foctet-stream"
+      },
+      {
+        "name": "ARM64 Protable (xZIP)",
+        "url": "https://release-assets.githubusercontent.com/github-production-release-asset/553135896/085875ee-64f9-4c94-98da-2ac217a7f6fa?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-11-05T09%3A13%3A48Z&rscd=attachment%3B+filename%3DPrismLauncher-Windows-MinGW-arm64-Portable-11.1.1.zip&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-11-05T08%3A13%3A01Z&ske=2026-11-05T09%3A13%3A48Z&sks=b&skv=2018-11-09&sig=pUic699G94XHJUuFpQs0WUpwmgQZIOYpW1cGyo08SrI%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc5Mzg2ODE4MiwibmJmIjoxNzkzODY2MzgyLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.jSCFaZxD9XZp6Jk1CTdV374njOyfyNUbiGk_pTvQogI&response-content-disposition=attachment%3B%20filename%3DPrismLauncher-Windows-MinGW-arm64-Portable-11.1.1.zip&response-content-type=application%2Foctet-stream"
+      }
+    ],
+    "about_vi": "Một trình khởi chạy Minecraft mã nguồn mở với khả năng quản lý nhiều phiên bản, tài khoản và bản mod. Tập trung vào quyền tự do của người dùng và khả năng tự do phân phối lại."
+  },
+  {
     "name": "Roblox - VNG",
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Roblox_VNG_Icon_2025.png/960px-Roblox_VNG_Icon_2025.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail%20640w",
     "download": "https://setup.rbxcdn.com/vng/version-5cf2272675e145f5-RobloxPlayerInstaller.exe",
