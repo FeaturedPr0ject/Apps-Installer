@@ -243,66 +243,157 @@
   to { opacity: 0; transform: translate(-50%, -7px) scale(.98); }
 }
 
+#apps-easter-egg-overlay.is-jumpscare-pause {
+  background: #000 !important;
+  filter: none !important;
+  animation: none !important;
+}
+#apps-easter-egg-overlay.is-jumpscare-pause::before,
+#apps-easter-egg-overlay.is-jumpscare-pause::after {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
 #apps-easter-egg-overlay.has-jumpscare {
+  overflow: hidden;
   background:
-    radial-gradient(ellipse at center, color-mix(in srgb, var(--entity-tint, #e8f1ed) 20%, transparent), transparent 56%),
+    radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--entity-tint, #e8f1ed) 24%, transparent), transparent 44%),
     var(--entity-background, #020303);
   animation: egg-entity-screen .075s steps(2, end) infinite;
 }
 
 #apps-easter-egg-overlay.has-jumpscare::before {
-  opacity: .38;
+  z-index: 5;
+  opacity: .72;
   background:
-    repeating-linear-gradient(0deg, transparent 0 1px, color-mix(in srgb, var(--entity-tint, #e8f1ed) 35%, transparent) 2px, transparent 3px 5px),
-    repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,.08) 19px, transparent 20px 29px);
+    repeating-linear-gradient(0deg, transparent 0 1px, color-mix(in srgb, var(--entity-tint, #e8f1ed) 55%, transparent) 2px, transparent 3px 5px),
+    repeating-linear-gradient(90deg, transparent 0 13px, rgba(255,255,255,.12) 14px, transparent 15px 23px),
+    linear-gradient(90deg, transparent 0 46%, color-mix(in srgb, var(--entity-tint, #e8f1ed) 20%, transparent) 50%, transparent 54%);
+  mix-blend-mode: screen;
+  animation: egg-entity-tear .055s steps(2, end) infinite;
 }
 
 #apps-easter-egg-overlay.has-jumpscare::after {
-  opacity: .65;
+  z-index: 6;
+  opacity: .8;
   background:
-    radial-gradient(ellipse at center, transparent 22%, rgba(0,0,0,.45) 68%, #000 100%),
-    repeating-linear-gradient(177deg, rgba(255,255,255,.06) 0 1px, transparent 2px 5px);
+    radial-gradient(ellipse at center, transparent 12%, rgba(0,0,0,.22) 42%, #000 100%),
+    repeating-linear-gradient(177deg, rgba(255,255,255,.1) 0 1px, transparent 2px 4px);
+  animation: egg-entity-vignette .09s steps(2, end) infinite;
+}
+
+.egg-jumpscare-stage {
+  position: absolute;
+  z-index: 2;
+  inset: -14%;
+  width: 128%;
+  height: 128%;
+  overflow: visible;
+  transform: scale(.4);
+  transform-origin: center;
+  animation: egg-stage-slam .28s cubic-bezier(.04,.88,.18,1) forwards, egg-stage-shake .065s steps(2,end) .28s 24;
+  will-change: transform;
 }
 
 .egg-entity-image {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: none;
+  max-height: none;
   object-fit: cover;
   user-select: none;
   pointer-events: none;
+  transform-origin: center;
+  will-change: transform, opacity, filter;
+}
+
+.egg-entity-main {
+  z-index: 3;
   filter:
-    drop-shadow(0 0 12px color-mix(in srgb, var(--entity-tint, #e8f1ed) 72%, transparent))
-    drop-shadow(0 0 36px color-mix(in srgb, var(--entity-tint, #e8f1ed) 38%, transparent));
-  animation: egg-jumpscare-pop .11s steps(2, end) both, egg-jumpscare-flicker .085s steps(2, end) .11s infinite;
+    drop-shadow(0 0 18px color-mix(in srgb, var(--entity-tint, #e8f1ed) 88%, transparent))
+    contrast(1.35) saturate(1.25);
+  animation: egg-entity-impact .26s cubic-bezier(.03,.92,.2,1) both, egg-entity-flicker .075s steps(2,end) .26s 22;
+}
+
+.egg-entity-echo {
+  z-index: 2;
+  opacity: .45;
+  mix-blend-mode: screen;
+  filter: contrast(1.8);
+  animation: egg-entity-impact .26s cubic-bezier(.03,.92,.2,1) both, egg-entity-echo-jitter .07s steps(2,end) .26s 20;
+}
+
+.egg-entity-echo-red {
+  filter: sepia(1) saturate(8) hue-rotate(315deg) contrast(2);
+}
+
+.egg-entity-echo-cyan {
+  filter: sepia(1) saturate(8) hue-rotate(145deg) contrast(2);
 }
 
 #apps-easter-egg-overlay.entity-image-unavailable::before {
   opacity: .9;
 }
 
-@keyframes egg-jumpscare-pop {
-  0% { opacity: 0; transform: scale(.22) rotate(-5deg); filter: blur(12px) contrast(2.4); }
-  65% { opacity: 1; transform: scale(1.12) rotate(1.6deg); filter: blur(0) contrast(1.8); }
-  100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0) contrast(1.25); }
+@keyframes egg-stage-slam {
+  0% { transform: scale(.4) rotate(-2deg); }
+  68% { transform: scale(1.14) rotate(1deg); }
+  100% { transform: scale(1.08) rotate(0); }
 }
 
-@keyframes egg-jumpscare-flicker {
-  0%, 100% { opacity: 1; }
-  25% { opacity: .76; }
+@keyframes egg-stage-shake {
+  0%,100% { translate: 0 0; rotate: 0deg; }
+  12% { translate: -26px 12px; rotate: -1.8deg; }
+  25% { translate: 22px -16px; rotate: 2deg; }
+  38% { translate: -19px -12px; rotate: -1.6deg; }
+  50% { translate: 28px 18px; rotate: 2.2deg; }
+  63% { translate: -24px 8px; rotate: -2deg; }
+  76% { translate: 20px -17px; rotate: 1.7deg; }
+  88% { translate: -15px 16px; rotate: -1.3deg; }
+}
+
+@keyframes egg-entity-impact {
+  0% { opacity: 0; transform: scale(.04) rotate(-12deg); filter: blur(18px) contrast(3); }
+  48% { opacity: 1; transform: scale(1.95) rotate(5deg); filter: blur(0) contrast(2.5); }
+  72% { opacity: 1; transform: scale(1.42) rotate(-2deg); filter: blur(0) contrast(1.8); }
+  100% { opacity: 1; transform: scale(1.72) rotate(0); filter: blur(0) contrast(1.55); }
+}
+
+@keyframes egg-entity-flicker {
+  0%,100% { opacity: 1; }
+  18% { opacity: .4; }
+  34% { opacity: 1; }
+  51% { opacity: .72; }
+  66% { opacity: 1; }
+  83% { opacity: .28; }
+}
+
+@keyframes egg-entity-echo-jitter {
+  0%,100% { opacity: .45; transform: translate(0,0) scale(1.72); }
+  25% { opacity: .7; transform: translate(-24px,7px) scale(1.8); }
+  50% { opacity: .25; transform: translate(19px,-9px) scale(1.68); }
+  75% { opacity: .65; transform: translate(-9px,-4px) scale(1.77); }
+}
+
+@keyframes egg-entity-tear {
+  0%,100% { transform: translate(0,0); opacity: .55; }
+  25% { transform: translate(-14px,5px); opacity: .9; }
+  50% { transform: translate(18px,-4px); opacity: .65; }
+  75% { transform: translate(-8px,-7px); opacity: .95; }
+}
+
+@keyframes egg-entity-vignette {
+  0%,100% { opacity: .72; }
   50% { opacity: .94; }
-  75% { opacity: .62; }
 }
 
 @keyframes egg-entity-screen {
-  0%, 100% { filter: contrast(1.2) brightness(.92); }
-  50% { filter: contrast(1.8) brightness(1.08); }
+  0%,100% { filter: contrast(1.25) brightness(.7) saturate(1.2); }
+  50% { filter: contrast(2.1) brightness(1.18) saturate(1.7); }
 }
-
 
 @media (max-width: 560px) {
   #apps-easter-egg-overlay { padding: 20px; }
