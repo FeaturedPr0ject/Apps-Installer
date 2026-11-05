@@ -158,9 +158,10 @@ function render(items) {
     list.append(empty);
     return;
   }
-  for (const app of items) {
+  for (const [index, app] of items.entries()) {
     const card = document.createElement("article");
     card.className = "app";
+    card.style.setProperty("--item-index", String(Math.min(index, 8)));
     const logo = document.createElement("img");
     logo.className = "app-logo";
     logo.alt = "";
