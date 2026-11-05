@@ -112,7 +112,8 @@
   }
 
   function showWhiteoutAndReload(overlay) {
-    overlay.classList.remove("has-jumpscare");
+    overlay.querySelector(".egg-jumpscare-stage")?.remove();
+    overlay.classList.remove("has-jumpscare", "is-jumpscare-pause");
     overlay.classList.add("is-whiteout");
     resetCount();
     window.setTimeout(() => window.location.reload(), 2000);
