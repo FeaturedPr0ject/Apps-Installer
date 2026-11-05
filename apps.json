@@ -14,14 +14,16 @@
         "name": "Roblox Website Installer",
         "url": "https://www.roblox.com/download/client?os=win&renderingPlatform=nextjs"
       }
-    ]
+    ],
+    "about_vi": "Tải bộ cài Windows chính thức trực tiếp từ CDN của Roblox. Bộ cài vẫn cần kết nối đến các dịch vụ Roblox để hoàn tất cài đặt, cập nhật ứng dụng, đăng nhập và chơi game. Hỗ trợ Windows 10/11 64-bit."
   },
   {
     "name": "Roblox - VNG",
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Roblox_VNG_Icon_2025.png/960px-Roblox_VNG_Icon_2025.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail%20640w",
     "download": "https://setup.rbxcdn.com/vng/version-5cf2272675e145f5-RobloxPlayerInstaller.exe",
     "about": "Play millions of experiences.",
-    "category": "windows-package"
+    "category": "windows-package",
+    "about_vi": "Chơi hàng triệu trải nghiệm."
   },
   {
     "name": "ChatGPT",
@@ -34,20 +36,23 @@
         "url": "https://get.microsoft.com/installer/download/9NT1R1C2HH7J?cid=website_cta_psi"
       }
     ],
-    "category": "windows-package"
+    "category": "windows-package",
+    "about_vi": "Thông tin này mô tả cách nhà phát triển thu thập và chia sẻ dữ liệu. Thực tiễn về quyền riêng tư và bảo mật có thể thay đổi tùy theo cách sử dụng, khu vực và độ tuổi. Thông tin do nhà phát triển cung cấp và có thể được cập nhật theo thời gian."
   },
   {
     "name": "HotSpot Shield",
     "image": "https://www.hotspotshield.com/favicon.ico",
     "download": "https://d26wo1m3adcxu5.cloudfront.net/HSS-773-ALT%7Bal_token%7D.exe?ko_click_id=ko_52496aec1a513f178",
     "about": "Protect yourself with military-grade encryption, and access sites and streaming content around the world.",
-    "category": "windows-package"
+    "category": "windows-package",
+    "about_vi": "Bảo vệ bạn bằng mã hóa cấp độ quân sự và truy cập các trang web, nội dung phát trực tuyến trên khắp thế giới."
   },
   {
     "name": "PSTools",
     "image": "https://learn.microsoft.com/en-us/sysinternals/downloads/media/shared/download_sm.png",
     "download": "https://download.sysinternals.com/files/PSTools.zip",
     "about": "Utilities like Telnet and remote control programs like Symantec's PC Anywhere let you execute programs on remote systems, but they can be a pain to set up and require that you install client software on the remote systems that you wish to access. ",
-    "category": "system-package"
+    "category": "system-package",
+    "about_vi": "Các tiện ích như Telnet và chương trình điều khiển từ xa như Symantec PC Anywhere cho phép thực thi chương trình trên hệ thống từ xa. Tuy nhiên, việc thiết lập có thể phức tạp và yêu cầu cài phần mềm máy khách trên các hệ thống từ xa cần truy cập."
   }
 ]
