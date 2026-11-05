@@ -47,7 +47,7 @@
       return;
     }
 
-    if (!event.target.closest(".download-wrap") && !event.target.closest(".download-menu")) {
+    if (!event.target.closest(".download-expand") && !event.target.closest(".download-menu")) {
       closeOthers(null);
     }
   });
