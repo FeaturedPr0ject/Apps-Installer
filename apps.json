@@ -14,7 +14,8 @@
         "name": "Roblox Website Installer",
         "url": "https://www.roblox.com/download/client?os=win&renderingPlatform=nextjs"
       }
-    ],
+      ]
+    },
     {
     "name": "Blox7",
     "image": "https://a.fsdn.com/allura/p/blox7/icon?01e72294f3e8fb190671cdb892696d14c45b0fa80b0fef0a661a9d03b1000ae0?&w=135",
