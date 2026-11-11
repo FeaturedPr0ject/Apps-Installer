@@ -15,7 +15,15 @@
         "url": "https://www.roblox.com/download/client?os=win&renderingPlatform=nextjs"
       }
     ],
-    "about_vi": "Tải bộ cài Windows chính thức trực tiếp từ CDN của Roblox. Bộ cài vẫn cần kết nối đến các dịch vụ Roblox để hoàn tất cài đặt, cập nhật ứng dụng, đăng nhập và chơi game. Hỗ trợ Windows 10/11 64-bit."
+    {
+    "name": "Blox7",
+    "image": "https://a.fsdn.com/allura/p/blox7/icon?01e72294f3e8fb190671cdb892696d14c45b0fa80b0fef0a661a9d03b1000ae0?&w=135",
+    "download": "https://master.dl.sourceforge.net/project/blox7/0.2/Blox7.exe?viasf=1&fid=aa531c07b4a51043&e=1794495765&st=AiR3V0jN15MwhmdrJUSjow",
+    "about": "Use Roblox to Windows7.",
+    "category": "windows-package",
+      }
+    ],
+    "about_vi": "Tải Roblox cho hệ điệu hành Windows7."
   },
   {
     "name": "Prism Launcher (MineCraft Launcher)",
