@@ -77,6 +77,14 @@
     "about_vi": "Windows Subsystem for Linux (WSL) cho phép chạy các bản Linux trên Windows. Hãy chọn gói MSI ARM64 trong trang phát hành WSL chính thức của Microsoft."
   },
   {
+    "name": "Banh Mi Back Khoa",
+    "image": "https://img.itch.zone/aW1nLzI3MDA0MzYwLmpwZw==/original/b2gNy2.jpg",
+    "download": "https://itchio-mirror.cb031a832f44726753d6267436f3b414.r2.cloudflarestorage.com/upload2/game/4530850/18637863?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=3edfcce40115d057d0b5606758e7e9ee%2F20261112%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20261112T064710Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=f21ab0ebda90fe91138354cb421625f560736fba03b9327a4f84441f4ddc89c4",
+    "about": "The Hust Banhmi | Bánh Mì Bách Khoa is the official sequel to Brother Hai's Pho Restaurant.",
+    "category": "windows-package",
+    "about_vi": "The Hust Banhmi | Bánh Mì Bách Khoa là phần hậu bản chính thức của Brother Hai's Pho Restaurant."
+  },
+  {
     "name": "O el Chocolate - Baldi MOD",
     "image": "https://images.gamebanana.com/img/ss/mods/6ad0bb8b0931a.jpg",
     "download": "https://gamebanana.com/dl/1849379",
