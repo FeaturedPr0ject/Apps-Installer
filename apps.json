@@ -77,6 +77,14 @@
     "about_vi": "Windows Subsystem for Linux (WSL) cho phép chạy các bản Linux trên Windows. Hãy chọn gói MSI ARM64 trong trang phát hành WSL chính thức của Microsoft."
   },
   {
+    "name": "O el Chocolate - Baldi MOD",
+    "image": "https://images.gamebanana.com/img/ss/mods/6ad0bb8b0931a.jpg",
+    "download": "https://gamebanana.com/dl/1849379",
+    "about": "o el chocolate",
+    "category": "windows-package",
+    "about_vi": "o el chocolate"
+  },
+  {
     "name": "CrystalDiskInfo",
     "image": "https://a.fsdn.com/allura/p/crystaldiskinfo/icon?bbb9abce3de6fe95e75443bda890cd32a552f2f11669c60090e21055c08694c7?&w=135",
     "download": "https://crystalmark.info/en/download/",
