@@ -1414,31 +1414,3 @@ footer {
   }
 }
 
-
-/* AdSense responsive banner at the bottom of the catalog */
-.adsense-bottom {
-  width: min(100% - 48px, 970px);
-  min-height: 90px;
-  margin: 28px auto 0;
-  padding: 12px 0;
-  text-align: center;
-}
-.adsense-label {
-  margin: 0 0 8px;
-  color: var(--muted);
-  font-size: 9px;
-  line-height: 1.4;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.adsense-bottom .adsbygoogle {
-  display: block;
-  width: 100%;
-  min-height: 90px;
-}
-@media (max-width: 560px) {
-  .adsense-bottom {
-    width: calc(100% - 28px);
-    margin-top: 20px;
-  }
-}
