@@ -57,40 +57,9 @@ Each app always keeps `download` as its main Download button. Add `downloaddl` o
 When `downloaddl` is missing or empty, only the primary Download button is shown. Existing `download` URLs are not replaced or converted. The extra field accepts an array of option objects, an object with an `options` array, a single option object, or a name-to-URL object map.
 
 
-## Create your own small ad
-
-Edit `ad.json` to control the single compact ad card shown above the app list. It is disabled by default. Set `enabled` to `true`, then add your title, description, image and destination URL.
-
-```json
-{
-  "enabled": true,
-  "badge": "Ad",
-  "title": "Your promotion title",
-  "description": "A short description for your promotion.",
-  "image": "https://example.com/promo-image.png",
-  "url": "https://example.com/your-page",
-  "button": "Learn more"
-}
-```
-
-Set `enabled` to `false` to hide it. The ad is a single manually managed placement; it does not connect to an ad network or track visitors. Changes to `ad.json` appear after the Vercel deployment completes.
-
-
-## Windows XP style advertisement popup
-
-The Windows XP-style advertisement popup is currently disabled while the site undergoes a Safe Browsing review. Only enable it again after confirming that the ad content and destination are safe and non-deceptive. It can be closed using the title-bar X or the Escape key. Clicking the dark background does not close it. The title bar can be dragged to move the window. Adjust `popupDelayMs` in `ad.json` to change the display delay.
-
-The popup uses adapted window, title-bar and button styling from [ShizukuIchi/winXP](https://github.com/ShizukuIchi/winXP). The original project is MIT licensed. Its MIT copyright and permission notice are included at `LICENSES/WinXP-MIT.txt`. This project uses CSS styling only and does not bundle the original Windows XP desktop or image assets. Windows XP names, artwork and trademarks belong to Microsoft; Apps Installer is not affiliated with or endorsed by Microsoft.
-
-
 ## Publisher and download transparency
 
 Apps Installer is an independent catalog and is not affiliated with the developers or publishers of the apps listed here. Download links open external websites. The site does not host, modify, bundle, or install those files. Visitors should check the destination hostname and verify the software publisher before downloading or running files.
-
-## Safe Browsing review
-
-The Windows XP-style advertising popup has been removed from the page and its JavaScript and CSS assets have been deleted while the site is reviewed. The disabled `ad.json` is retained as configuration data only and is not loaded by the page. Re-enable advertising only after ensuring the content and destination are clearly labeled and not likely to be mistaken for system, browser, or publisher UI.
-
 
 ## Responsibility notice
 
